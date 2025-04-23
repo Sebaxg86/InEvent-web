@@ -70,10 +70,10 @@ nav a:hover {
 }
 
 nav ul {
-    list-style: none; /* Remove default bullets */
-    display: flex; /* Arrange items horizontally */
-    justify-content: center; /* Center nav items */
-    gap: 2rem; /* Space between items */
+    list-style: none; 
+    display: flex; 
+    justify-content: center; 
+    gap: 2rem; 
     padding: 0;
     margin: 0;
     align-items: center;
