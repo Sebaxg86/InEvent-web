@@ -24,3 +24,30 @@ body {
     --hover-color: #003DC0;             /* Darker hover color for buttons */
     --shadow: rgba(0, 0, 0, 0.05);       /* Subtle shadow for elevation */
 }
+
+/* ========== GENERAL STYLES ========== */
+/* body, headings, text spacing */
+
+/* ========== HEADER & NAVBAR ========== */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 1.2rem 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 4px var(--shadow);
+}
+
+
+
+/* ========== BUTTONS ========== */
+
+/* ========== FORMS ========== */
+
+/* ========== LAYOUT GRIDS ========== */
