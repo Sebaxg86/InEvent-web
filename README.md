@@ -1,6 +1,6 @@
 # InEvent Web App 🎟️
 
-[Brief one-line description of what the project does.]
+A simple and scalable ticketing system built with classic web technologies.
 
 ## 🌐 Live Demo
 
