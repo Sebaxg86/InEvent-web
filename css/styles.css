@@ -44,7 +44,7 @@ header {
     box-shadow: 0 2px 4px var(--shadow);
 }
 
-nav {
+.nav-bar {
     position: sticky;
     top: 72px;
     z-index: 999;
@@ -59,17 +59,17 @@ nav {
     transition: top 0.3s ease-in-out;
 }
 
-nav a {
+.nav-bar a {
     color: var(--text-color);
     text-decoration: none;
     transition: color 0.2s;
 }
 
-nav a:hover {
+.nav-bar a:hover {
     color: var(--secondary-color);
 }
 
-nav ul {
+.nav-bar ul {
     list-style: none; 
     display: flex; 
     justify-content: center; 
@@ -79,7 +79,7 @@ nav ul {
     align-items: center;
 }
 
-nav li {
+.nav-bar li {
     margin: 0;
     padding: 0;
 }
