@@ -44,7 +44,45 @@ header {
     box-shadow: 0 2px 4px var(--shadow);
 }
 
+nav {
+    position: sticky;
+    top: 72px;
+    z-index: 999;
+    background-color: var(--navbar-bg);
+    backdrop-filter: var(--navbar-blur);
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0.75rem 1rem;
+    font-weight: 500;
+    box-shadow: 0 1px 4px var(--shadow);
+    transition: top 0.3s ease-in-out;
+}
 
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: var(--secondary-color);
+}
+
+nav ul {
+    list-style: none; /* Remove default bullets */
+    display: flex; /* Arrange items horizontally */
+    justify-content: center; /* Center nav items */
+    gap: 2rem; /* Space between items */
+    padding: 0;
+    margin: 0;
+    align-items: center;
+}
+
+nav li {
+    margin: 0;
+    padding: 0;
+}
 
 /* ========== BUTTONS ========== */
 
