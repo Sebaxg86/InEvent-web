@@ -13,3 +13,14 @@ body {
     line-height: 1.6;
 }
 
+/* Color palette */
+:root {
+    --primary-color: #0057FF;           /* Strong blue for header and main buttons */
+    --secondary-color: #FF4081;         /* Vibrant pink for accents and hover */
+    --text-color: #333333;              /* Main text color */
+    --bg-color: #FFFFFF;                /* General page background */
+    --navbar-bg: rgba(255, 255, 255, 0.8); /* Translucent navbar background */
+    --navbar-blur: blur(8px);           /* Glass effect for navbar */
+    --hover-color: #003DC0;             /* Darker hover color for buttons */
+    --shadow: rgba(0, 0, 0, 0.05);       /* Subtle shadow for elevation */
+}
