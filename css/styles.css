@@ -87,13 +87,26 @@ header {
     padding: 0;
 }
 
+/* ========== WELCOME MESSAGE ========== */
+.welcome-message h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 2rem;
+}
+
+.welcome-message p {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+}
+
 /* ========== BUTTONS ========== */
 
 /* ========== FORMS ========== */
 
-/* ========== LAYOUT GRIDS ========== */
-
 /* ========== FOOTER ========== */
+
 footer {
     background-color: var(--footer-bg); /* Strong blue background */
     color: var(--footer-text); /* Gray text for contrast */
