@@ -23,6 +23,8 @@ body {
     --navbar-blur: blur(8px);           /* Glass effect for navbar */
     --hover-color: #003DC0;             /* Darker hover color for buttons */
     --shadow: rgba(0, 0, 0, 0.05);       /* Subtle shadow for elevation */
+    --footer-bg: rgb(221,221,221);
+    --footer-text: rgb(99,99,99);
 }
 
 /* ========== GENERAL STYLES ========== */
@@ -57,6 +59,7 @@ header {
     font-weight: 500;
     box-shadow: 0 1px 4px var(--shadow);
     transition: top 0.3s ease-in-out;
+    flex-wrap: wrap;
 }
 
 .nav-bar a {
@@ -91,3 +94,51 @@ header {
 /* ========== LAYOUT GRIDS ========== */
 
 /* ========== FOOTER ========== */
+footer {
+    background-color: var(--footer-bg); /* Strong blue background */
+    color: var(--footer-text); /* Gray text for contrast */
+    padding: 0.5rem 0.5rem; /* Spacing around content */
+    text-align: center; /* Center-align text */
+    font-size: 0.9rem; /* Slightly smaller font size */
+}
+
+.footer-title-div{
+    margin-bottom: 1.5rem;
+}
+
+.footer-title-div h4{
+    font-size: 1.4rem;
+}
+
+.footer-nav{
+    margin-bottom: 2rem;
+}
+
+.footer-nav ul{
+    list-style: none;
+    display:flex;
+    justify-content: center;
+    gap:2rem;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+}
+
+.footer-nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-nav a:hover {
+    color: var(--secondary-color);
+}
+
+.socials-div a{
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.socials-div a:hover{
+    color: var(--secondary-color)
+}
