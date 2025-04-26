@@ -166,7 +166,45 @@ header {
     transform: scale(1.05);
 }
 
-/* ========== FORMS ========== */
+/* ========== FEATURES SECTION ========== */
+
+.feature-section {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.feature-section > div {
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+.feature-section-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.feature-section-icon {
+    margin: 1.5rem 0;
+}
+
+.feature-section p {
+    margin-top: 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+}
 
 /* ========== FOOTER ========== */
 
