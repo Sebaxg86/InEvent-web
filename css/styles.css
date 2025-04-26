@@ -21,7 +21,7 @@ body {
     --bg-color: #FFFFFF;                /* General page background */
     --navbar-bg: rgba(255, 255, 255, 0.8); /* Translucent navbar background */
     --navbar-blur: blur(8px);           /* Glass effect for navbar */
-    --hover-color: #003DC0;             /* Darker hover color for buttons */
+    --hover-color: #002a83;             /* Darker hover color for buttons */
     --shadow: rgba(0, 0, 0, 0.05);       /* Subtle shadow for elevation */
     --footer-bg: rgb(221,221,221);
     --footer-text: rgb(99,99,99);
@@ -142,7 +142,29 @@ header {
 .carousel-btn.next { right: 15px; }
 
 /* ========== BUTTONS ========== */
+.btn-div{
+    display: flex;
+    justify-content: center;
+}
 
+.btn{
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    padding: 0.9rem 2.2rem;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0,87,255,0.3);
+}
+
+.btn:hover{
+    background-color: var(--hover-color);
+    transform: scale(1.05);
+}
 
 /* ========== FORMS ========== */
 
