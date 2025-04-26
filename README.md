@@ -4,7 +4,7 @@ A simple and scalable ticketing system built with classic web technologies.
 
 ## 🌐 Live Demo
 
-> Work In Progress
+> Release v0.0.2: https://sebaxg86.github.io/InEvent-web/
 
 ## ⚙️ Technologies Used
 
