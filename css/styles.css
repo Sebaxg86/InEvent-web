@@ -15,7 +15,7 @@ body {
 
 /* Color palette */
 :root {
-    --primary-color: #0057FF;           /* Strong blue for header and main buttons */
+    --primary-color: #0055ff;           /* Strong blue for header and main buttons */
     --secondary-color: #FF4081;         /* Vibrant pink for accents and hover */
     --text-color: #333333;              /* Main text color */
     --bg-color: #FFFFFF;                /* General page background */
