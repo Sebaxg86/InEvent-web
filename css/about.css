@@ -1,0 +1,81 @@
+/* about.css */
+
+/* General layout */
+main {
+    padding: 20px 20px;
+    background-color: #f9f9f9;
+}
+
+/* Section styling */
+main section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 80px;
+    flex-wrap: wrap;
+}
+
+/* Reverse layout for even sections */
+main section:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+/* Image styling */
+main section img {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Text block */
+main section div h3 {
+    font-size: 2rem;
+    color: #222;
+    margin-bottom: 15px;
+}
+
+main section div p,
+main section div ul {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Values list styling */
+main section div ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+main section div ul li {
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+/* Center align text block if needed */
+main section div {
+    max-width: 500px;
+}
+
+/* Divider (hr) styling */
+hr {
+    margin: 60px auto;
+    width: 80%;
+    border: 1px solid #ccc;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    main section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    main section:nth-child(even) {
+        flex-direction: column;
+    }
+}
