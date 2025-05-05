@@ -1,1 +1,19 @@
+# Php dependencies
+/vendor/
+
+# Sensible files, upload only dummies
+/config/database.php
+/config/paypal.php
+.env
+
+/storage/*
+!storage/.gitkeep
+
+*.log
+*.cache
+
 .DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
