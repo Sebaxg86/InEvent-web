@@ -2,8 +2,8 @@
 /vendor/
 
 # Sensible files, upload only dummies
-/config/database.php
-/config/paypal.php
+## /config/database.php
+## /config/paypal.php
 .env
 
 /storage/*
