@@ -14,9 +14,7 @@
 </head>
 <body>
     <!--Header-->
-    <header>
-        <h1>InEvent</h1>
-    </header>
+    <?php include_once '../includes/header.php'; ?>
 
     <!--Main-->
     <main>
