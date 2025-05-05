@@ -15,20 +15,10 @@
 <body>
 
     <!--Header-->
-    <header>
-        <h1>InEvent</h1>
-    </header>
+    <?php include_once '../includes/header.php'; ?>
 
     <!--Navbar-->
-    <nav class="nav-bar">
-        <ul>
-            <li><a href="index.html">Home <ion-icon name="home-outline"></ion-icon></a></li>
-            <li><a href="events.html">Events <ion-icon name="ticket-outline"></ion-icon></a></li>
-            <li><a href="about.html">About us <ion-icon name="information-circle-outline"></ion-icon></a></li>
-            <li><a href="contact.html">Contact <ion-icon name="paper-plane-outline"></ion-icon></a></li>
-            <li><a href="register.html">Register <ion-icon name="log-in-outline"></ion-icon></a></li>
-        </ul>
-    </nav>
+    <?php include_once '../includes/navbar.php'; ?>
 
     <!--Main-->
     <section class="welcome-message">
@@ -56,32 +46,7 @@
     </div>
 
     <!--Footer-->
-    <footer>
-        <div class="footer-title-div">
-            <h4>InEvent</h4>
-            <p>Your gateway to unforgettable experiences.</p>
-        </div>
-        
-        <nav class="footer-nav">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="register.html">Register</a></li>
-            </ul>
-        </nav>
-
-        <div class="socials-div">
-            <p>
-                Follow us:
-                <a href="#">Facebook <ion-icon name="logo-facebook"></ion-icon> |</a> 
-                <a href="#">Twitter <ion-icon name="logo-twitter"></ion-icon> |</a> 
-                <a href="#">Instagram <ion-icon name="logo-instagram"></ion-icon></a>
-            </p>
-            <p>&copy; 2025 InEvent. All rights reserved. By: Sebastian Chairez</p>
-        </div>
-    </footer>
+    <?php include_once "../includes/footer.php"; ?>
 
     <!--Ionic Icons Installation-->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
