@@ -17,3 +17,46 @@
     width: 100%;
     text-align: center;
 }
+
+.user-card {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.card {
+    width: 400px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.user-info, .user-purchases {
+    margin-bottom: 20px;
+}
+
+.user-purchases ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.user-purchases li {
+    background-color: #e9ecef;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
