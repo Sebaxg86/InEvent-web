@@ -1,0 +1,23 @@
+<section class="welcome-message">
+    <h2>Your Information</h2>
+</section>
+
+<div class="user-card">
+    <div class="card">
+        <div class="user-info">
+            <h3>Basic Information</h3>
+            <p><strong>Name:</strong> 
+            <p><strong>Email:</strong> 
+        </div>
+        <hr>
+        <div class="user-purchases">
+            <h3>Purchases</h3>
+            <ul>
+                <li>compra 1</li>
+                <li>compra 2</li>
+                <li>compra 3</li>
+                <li>compra 4</li>
+            </ul>
+        </div>
+    </div>
+</div>
