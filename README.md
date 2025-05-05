@@ -12,6 +12,8 @@ A simple and scalable ticketing system built with classic web technologies.
 - HTML5
 - CSS
 - JavaScript (Vanilla)
+- PHP
+- 
 
 ## 📚 Description
 
@@ -20,6 +22,8 @@ This project was developed as part of a web development course and includes:
 - ✅ A modern landing page for an event ticketing system
 - ✅ Custom design using HTML and CSS
 - ✅ Responsive layout and interactive elements with JavaScript
+- ✅ Paypal pay
+- ✅ Account creation
 
 ## 👨‍💻 Author
 
