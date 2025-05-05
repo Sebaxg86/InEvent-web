@@ -13,7 +13,7 @@ A simple and scalable ticketing system built with classic web technologies.
 - CSS
 - JavaScript (Vanilla)
 - PHP
-- 
+- MySQL
 
 ## 📚 Description
 
