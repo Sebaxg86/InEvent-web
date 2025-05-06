@@ -16,12 +16,14 @@ body {
 /* Color palette */
 :root {
     --primary-color: #0055ff;           /* Strong blue for header and main buttons */
-    --secondary-color: #FF4081;         /* Vibrant pink for accents and hover */
+    --secondary-color: #FF4081;
+    --danger-color: #ff0000;         /* Vibrant pink for accents and hover */
     --text-color: #333333;              /* Main text color */
     --bg-color: #FFFFFF;                /* General page background */
     --navbar-bg: rgba(255, 255, 255, 0.8); /* Translucent navbar background */
     --navbar-blur: blur(8px);           /* Glass effect for navbar */
-    --hover-color: #002a83;             /* Darker hover color for buttons */
+    --hover-color: #002a83;
+    --hover-color-danger: #ae0000;             /* Darker hover color for buttons */
     --shadow: rgba(0, 0, 0, 0.05);       /* Subtle shadow for elevation */
     --footer-bg: rgb(221,221,221);
     --footer-text: rgb(99,99,99);

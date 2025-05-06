@@ -60,3 +60,22 @@ hr {
     border-top: 1px solid #ddd;
     margin: 20px 0;
 }
+
+.btn-danger{
+    background-color: var(--danger-color);
+    border: none;
+    color: white;
+    padding: 0.9rem 2.2rem;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+}
+
+.btn-danger:hover{
+    background-color: var(--hover-color-danger);
+    transform: scale(1.05);
+}

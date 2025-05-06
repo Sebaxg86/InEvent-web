@@ -8,6 +8,13 @@
             <h3>Basic Information</h3>
             <p><strong>Name:</strong> <?= htmlspecialchars($_SESSION['user']['name']) ?></p>
             <p><strong>Email:</strong> <?= htmlspecialchars($_SESSION['user']['email']) ?></p>
+
+            <!-- Logout button -->
+            <form action="../public/logout.php">
+                <div class="btn-div">
+                    <button class="btn-danger">Logout</button>
+                </div>
+            </form>
         </div>
         <hr>
         <div class="user-purchases">
