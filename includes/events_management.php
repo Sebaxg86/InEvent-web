@@ -1,9 +1,13 @@
 <?php
+$view = $_GET['view'] ?? 'list';
+
 if (!isset($_SESSION['user']) || $_SESSION['user']['is_admin'] != 1) {
-    // Si no hay sesión o el usuario no es admin (es cliente o guest)
     include_once 'events_list_public.php';
 } else {
-    // Si el usuario es admin
-    include_once 'events_list_admin.php';
+    if ($view === 'add') {
+        include_once 'events_management_add.php';
+    } else {
+        include_once 'events_list_admin.php';
+    }
 }
 ?>
