@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     try {
-        $stmt = $pdo->prepare("SELECT id, name, email, pass_hash FROM users WHERE email = :email LIMIT 1");
+        $stmt = $pdo->prepare("SELECT id, name, email, pass_hash, is_admin, is_guest FROM users WHERE email = :email LIMIT 1");
         $stmt->execute(['email' => $email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 'is_admin' => $user['is_admin'],
                 'is_guest' => $user['is_guest']
             ];
-            header("Location: ../../public/register.php");
+            header("Location: ../../public/index.php");
             exit;
         } else {
             $_SESSION['error'] = "Invalid email or password.";
