@@ -4,7 +4,7 @@
 
         <?php if (isset($_SESSION['user'])): ?>
             <?php if ($_SESSION['user']['is_admin'] == 1): ?>
-                <li><a href="manage_events.php">Manage Events <ion-icon name="construct-outline"></ion-icon></a></li>
+                <li><a href="events.php">Manage Events <ion-icon name="construct-outline"></ion-icon></a></li>
                 <li><a href="logout.php">Log Out <ion-icon name="log-out-outline"></ion-icon></a></li>
             <?php else: ?>
                 <li><a href="events.php">Events <ion-icon name="ticket-outline"></ion-icon></a></li>

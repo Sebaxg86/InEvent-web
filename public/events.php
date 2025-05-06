@@ -27,7 +27,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <?php include_once '../includes/navbar.php'; ?>
 
     <main>
-        <?php include_once "../includes/events_management.php"; ?>
+        <?php include_once '../includes/events_management.php'; ?>
     </main>
 
     <!--Footer-->
