@@ -6,8 +6,8 @@
     <div class="card">
         <div class="user-info">
             <h3>Basic Information</h3>
-            <p><strong>Name:</strong> 
-            <p><strong>Email:</strong> 
+            <p><strong>Name:</strong> <?= htmlspecialchars($_SESSION['user']['name']) ?></p>
+            <p><strong>Email:</strong> <?= htmlspecialchars($_SESSION['user']['email']) ?></p>
         </div>
         <hr>
         <div class="user-purchases">
