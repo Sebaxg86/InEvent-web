@@ -21,7 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION['user'] = [
                 'id' => $user['id'],
                 'name' => $user['name'],
-                'email' => $user['email']
+                'email' => $user['email'],
+                'is_admin' => $user['is_admin'],
+                'is_guest' => $user['is_guest']
             ];
             header("Location: ../../public/register.php");
             exit;
