@@ -24,6 +24,7 @@
             <input type="file" name="image" accept="image/*" required><br><br>
     
             <button class="btn" type="submit">Save Event</button>
+
             <a href="events.php" class="btn-danger">Cancel</a>
         </form>
     </div>
