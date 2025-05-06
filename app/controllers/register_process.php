@@ -32,17 +32,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        $stmt = $pdo->prepare("INSERT INTO users (name, email, pass_hash) VALUES (:name, :email, :pass)");
+        $stmt = $pdo->prepare("INSERT INTO users (name, email, pass_hash, is_admin, is_guest) VALUES (:name, :email, :pass, :is_admin, :is_guest)");
         $stmt->execute([
             'name' => $fullname,
             'email' => $email,
-            'pass' => $hashed_password
+            'pass' => $hashed_password,
+            'is_admin' => 0,
+            'is_guest' => 0
         ]);
 
         $_SESSION['user'] = [
             'id' => $pdo->lastInsertId(),
             'name' => $fullname,
-            'email' => $email
+            'email' => $email,
+            'is_admin' => 0,
+            'is_guest' => 0
         ];
 
         header("Location: ../../public/register.php");
