@@ -1,3 +1,11 @@
+<!--===========================-->
+<?php
+session_start();
+
+$form_type = $_GET['form'] ?? 'login'; // default = login
+?>
+
+<!--===========================-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +30,17 @@
     <?php include_once '../includes/navbar.php'; ?>
 
     <!--Main-->
-    <?php include_once '../includes/user_info.php'; ?>
+    <?php
+        if (isset($_SESSION['user'])) {
+            include_once '../includes/user_info.php';
+        } else {
+            if ($form_type === 'register') {
+                include_once '../includes/register_account.php';
+            } else {
+                include_once '../includes/login.php';
+            }
+        }
+    ?>
 
     <!--Footer-->
     <?php include_once "../includes/footer.php"; ?>

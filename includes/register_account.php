@@ -4,7 +4,7 @@
 
 <div class="content-container">
     <div class="content-form">
-        <form action="#" method="post">
+        <form action="../app/controllers/register_process.php" method="post">
             <label for="fullname">Full Name:</label><br>
             <input type="text" id="fullname" name="fullname" required><br><br>
     
@@ -19,5 +19,8 @@
     
             <button class="btn" type="submit">Register</button>
         </form>
+        <p>Already have an account? 
+            <a href="register.php?form=login">Login here</a>
+        </p>
     </div>
 </div>

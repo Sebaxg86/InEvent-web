@@ -4,7 +4,7 @@
 
 <div class="content-container">
     <div class="content-form">
-        <form action="#" method="post">
+        <form action="../app/controllers/login_process.php" method="post">
             <label for="email">Email Address:</label><br>
             <input type="email" id="email" name="email" required><br><br>
     
@@ -13,5 +13,8 @@
     
             <button class="btn" type="submit">Login</button>
         </form>
+        <p>Don't have an InEvent account? 
+            <a href="register.php?form=register">Create one</a>
+        </p>
     </div>
 </div>
