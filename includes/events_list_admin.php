@@ -5,7 +5,7 @@
 <section>
     <div class="events-container">
         <div class="btn-div">
-            <a href="events.php?view=add" class="btn" style="margin-top: 2rem; margin-bottom: 1.5rem">+ Add Event</a>
+            <a href="../public/events.php?view=add" class="btn" style="margin-top: 2rem; margin-bottom: 1.5rem">+ Add Event</a>
         </div>
 
         <div class="events-grid">
