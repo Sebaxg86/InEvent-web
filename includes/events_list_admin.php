@@ -19,7 +19,6 @@
                 <p>Location: <?php echo $event['venue']; ?></p>
                 <p>Type: <?php echo $event['type']; ?></p>
                 <p>From $<?php echo number_format($event['price'], 2); ?> MXN</p>
-                <a href="events.php?view=edit&id=<?php echo $event['id']; ?>" class="btn">Edit</a>
                 <form method="POST" action="../app/controllers/delete_event.php" onsubmit="return confirm('Are you sure you want to delete this event?');">
                     <input type="hidden" name="event_id" value="<?php echo $event['id']; ?>">
                     <button type="submit" class="btn btn-danger">Delete</button>
