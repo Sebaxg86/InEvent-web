@@ -10,28 +10,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $location = $_POST['location'];
     $type = $_POST['type'];
     $price = $_POST['price'];
+    $total_seats = $_POST['total_seats'];
+    $image_url = $_POST['image_url'];
 
-    // Manejo de imagen
-    if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
-        $image_name = uniqid() . '_' . basename($_FILES['image']['name']);
-        $target_dir = "../public/assets/img/";
-        $target_file = $target_dir . $image_name;
+    try {
+        // Insertamos el evento en la base de datos
+        $stmt = $pdo->prepare("INSERT INTO events (title, event_date, venue, type, price, total_seats, img) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$title, $date, $location, $type, $price, $total_seats, $image_url]);
 
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
-            // Insertamos el evento en la base de datos
-            $stmt = $pdo->prepare("INSERT INTO events (title, event_date, venue, type, price, img) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$title, $date, $location, $type, $price, 'assets/img/' . $image_name]);
-
-            // Redirigimos al listado de eventos
-            header("Location: ../public/events.php?view=list&success=added");
-            exit();
-        } else {
-            header("Location: ../public/events.php?view=add&error=upload_failed");
-            exit();
-        }
-    } else {
-        header("Location: ../public/events.php?view=add&error=no_image");
+        // Redirigimos al listado de eventos
+        header("Location: ../../public/events.php?view=list&success=added");
         exit();
+    } catch (PDOException $e) {
+        // Mostrar el error de PDO
+        die("Database Error: " . $e->getMessage());
     }
 } else {
     header("Location: ../public/events.php");

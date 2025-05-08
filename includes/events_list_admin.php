@@ -13,7 +13,7 @@
         $stmt = $pdo->query("SELECT * FROM events ORDER BY event_date ASC");
         while ($event = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
             <div class="event-card">
-                <img src="assets/img/<?php echo $event['img']; ?>" alt="<?php echo $event['title']; ?>">
+                <img src="<?php echo $event['img']; ?>" alt="<?php echo $event['title']; ?>" style="width:100%; height:auto;">
                 <h3><?php echo $event['title']; ?></h3>
                 <p>Date: <?php echo date('F j, Y · g:i A', strtotime($event['event_date'])); ?></p>
                 <p>Location: <?php echo $event['venue']; ?></p>

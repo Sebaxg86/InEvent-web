@@ -4,7 +4,7 @@
 
 <section class="content-container">
     <div class="content-form">
-        <form action="../app/controllers/add_event_process.php" method="POST" enctype="multipart/form-data">
+        <form action="../app/controllers/add_event_process.php" method="POST">
             <label>Title:</label>
             <input type="text" name="title" required><br>
     
@@ -19,9 +19,12 @@
     
             <label>Price (MXN):</label>
             <input type="number" name="price" required><br>
+
+            <label>Total Seats:</label>
+            <input type="number" name="total_seats" required><br>
     
-            <label>Image:</label>
-            <input type="file" name="image" accept="image/*" required><br><br>
+            <label>Image URL:</label>
+            <input type="url" name="image_url" required><br><br>
     
             <button class="btn" type="submit">Save Event</button>
             <a href="events.php" class="btn btn-danger">Cancel</a>
