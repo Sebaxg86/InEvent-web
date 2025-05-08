@@ -1,0 +1,47 @@
+.seats-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.seats-grid {
+    display: grid;
+    gap: 10px;
+    justify-content: center;
+}
+
+.row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.seat {
+    background-color: #e0e0e0;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.seat.selected {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.selection-info {
+    margin-top: 1rem;
+}
+
+.btn {
+    margin-top: 1rem;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
