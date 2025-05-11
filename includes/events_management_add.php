@@ -15,7 +15,17 @@
             <input type="text" name="location" required><br>
     
             <label>Type:</label>
-            <input type="text" name="type" required><br>
+            <select name="type" required>
+                <option value="Concert">Concert (With Seats)</option>
+                <option value="Concert (Standing)">Concert (Standing)</option>
+                <option value="Theater">Theater</option>
+                <option value="Opera">Opera</option>
+                <option value="Conference">Conference</option>
+                <option value="Marathon">Marathon</option>
+                <option value="Anime Convention">Anime Convention</option>
+                <option value="Formula 1">Formula 1</option>
+            </select>
+            <br>
     
             <label>Price (MXN):</label>
             <input type="number" name="price" required><br>
