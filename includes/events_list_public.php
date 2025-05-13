@@ -13,9 +13,10 @@
                 // Decide if this event uses numbered seats
                 $usesSeats = in_array($event['type'], [
                     'Concert',
-                    'Concert (With Seats)',
                     'Theater',
-                    'Opera'
+                    'Opera',
+                    'Cinema',
+                    'Conference'
                 ]);
                 $btnText = $usesSeats ? 'View Seats' : 'Buy Tickets';
             ?>
