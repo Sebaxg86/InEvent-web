@@ -1,36 +1,68 @@
-.seats-container {
-    text-align: center;
-    margin-top: 2rem;
+.container{
+
+    display:grid;
+    grid-template-columns: repeat(10, 1fr);
+    column-gap: 5px;
+    row-gap: 30px;
+    padding:20px;
+    justify-items: center;
+
+    margin: 80px auto;
+    width: 90%; /* Ancho flexible */
+    max-width: 900px; /* Límite máximo del ancho */
+    height: auto; /* Altura fija del contenedor */
+    max-height: 750px;
+    overflow-y: auto; /* Habilita el scroll vertical */
+    overflow-x:scroll; /* Evita el scroll horizontal */
+    border: 2px solid #ccc; /* Borde para visualizar el contenedor */
+    border-radius: 10px; /* Bordes redondeados */
+    background-color: #fff; /* Fondo blanco */
+
 }
 
-.seats-grid {
-    display: grid;
-    gap: 10px;
-    justify-content: center;
-}
-
-.row {
+.seat{
     display: flex;
-    gap: 8px;
-    justify-content: center;
+    flex-direction: column; /* Coloca el ícono arriba y el texto abajo */
+    align-items: center; /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
+    width: 75px; /* Ancho del asiento */
+    height: 75px; /* Alto del asiento */
+    background-color: #f0f0f0; /* Color de fondo */
+    border: 2px solid #ccc; /* Borde del asiento */
+    border-radius: 10px; /* Bordes redondeados */
+    text-align: center; /* Centra el texto */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    transition: all 0.3s ease; /* Transición suave para hover */
 }
 
-.seat {
-    background-color: #e0e0e0;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
+/* Ícono dentro del asiento */
+.seat ion-icon {
+    font-size: 30px; /* Tamaño del ícono */
+    color: #555; /* Color del ícono */
+    margin-bottom: 5px; /* Espacio entre el ícono y el texto */
 }
 
-.seat.selected {
-    background-color: #4caf50;
-    color: #fff;
+/* Texto del asiento */
+.seat span {
+    font-size: 14px; /* Tamaño del texto */
+    font-weight: 600; /* Peso del texto */
+    color: #333; /* Color del texto */
 }
 
-.selection-info {
-    margin-top: 1rem;
+/* Efecto hover */
+.seat:hover {
+    background-color: #d1e7dd; /* Cambia el color de fondo al pasar el mouse */
+    border-color: #0d6efd; /* Cambia el color del borde */
+    color: #0d6efd; /* Cambia el color del texto */
 }
+
+.seat:hover ion-icon {
+    color: #0d6efd; /* Cambia el color del ícono al pasar el mouse */
+}
+
+
+
+
 
 .btn {
     margin-top: 1rem;

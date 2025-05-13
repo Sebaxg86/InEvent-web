@@ -2,6 +2,34 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+require_once '../config/database.php'; // Incluye la conexión a la base de datos
+
+// Obtén el ID del evento desde la URL
+$eventId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+
+if ($eventId === 0) {
+    die("Evento no válido.");
+}
+
+try {
+    // Consulta para obtener el total de asientos del evento
+    $stmt = $pdo->prepare("SELECT total_seats FROM events WHERE id = :eventId");
+    $stmt->bindParam(':eventId', $eventId, PDO::PARAM_INT);
+    $stmt->execute();
+
+    // Obtén el resultado
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($result) {
+        $totalSeats = $result['total_seats']; // Total de asientos del evento
+    } else {
+        throw new Exception("Evento no encontrado.");
+    }
+} catch (Exception $e) {
+    die("Error al obtener el total de asientos: " . $e->getMessage());
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -27,32 +55,41 @@ if (session_status() === PHP_SESSION_NONE) {
     <!--Navbar-->
     <?php include_once '../includes/navbar.php'; ?>
 
+    <!--Seats selection-->
+    
     <main>
-        <section class="seats-container">
-            <h2>Select Your Seats</h2>
-            <div class="seats-grid">
-                <div class="row">
-                    <div class="seat" data-seat="A1"><ion-icon name="person-outline"></ion-icon></div>
-                    <div class="seat" data-seat="A2"><ion-icon name="person-outline"></ion-icon></div>
-                    <div class="seat" data-seat="A3"><ion-icon name="person-outline"></ion-icon></div>
-                    <div class="seat" data-seat="A4"><ion-icon name="person-outline"></ion-icon></div>
-                </div>
-                <div class="row">
-                    <div class="seat" data-seat="B1"><ion-icon name="person-outline"></ion-icon></div>
-                    <div class="seat" data-seat="B2"><ion-icon name="person-outline"></ion-icon></div>
-                    <div class="seat" data-seat="B3"><ion-icon name="person-outline"></ion-icon></div>
-                    <div class="seat" data-seat="B4"><ion-icon name="person-outline"></ion-icon></div>
-                </div>
-            </div>
-            <div class="selection-info">
-                <p>Selected Seats: <span id="selected-seats"></span></p>
-                <p>Total: <span id="total-price">0 MXN</span></p>
-            </div>
-            <button class="btn" id="proceed-payment">Proceed to Payment</button>
-        </section>
+        <div class="container">
+            <?php
+            $columns = 10; // Número de columnas por fila
+            $alphabet = range('A', 'Z'); // Genera las letras de la A a la Z
+            $rowIndex = 0; // Índice para las filas
 
-        <script src="../js/events_seats.js"></script>
+            for ($i = 1; $i <= $totalSeats; $i++) {
+                // Calcula la fila actual
+                if (($i - 1) % $columns == 0 && $i > 1) {
+                    $rowIndex++;
+                }
+
+                // Genera el nombre de la fila (A, B, ..., Z, AA, AB, ...)
+                $rowName = '';
+                $tempIndex = $rowIndex;
+                while ($tempIndex >= 0) {
+                    $rowName = $alphabet[$tempIndex % 26] . $rowName;
+                    $tempIndex = floor($tempIndex / 26) - 1;
+                }
+
+                // Genera el asiento con el formato "Fila + Número"
+                $seatNumber = $i % $columns == 0 ? $columns : $i % $columns;
+                echo 
+                '<div class="seat"> 
+                    <ion-icon name="person-outline"></ion-icon>
+                    ' . $rowName . $seatNumber . '
+                </div>';
+            }
+            ?>
+        </div>
     </main>
+    
 
     <!--Footer-->
     <?php include_once "../includes/footer.php"; ?>
@@ -60,5 +97,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <!--Ionic Icons Installation-->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<?php
+?>
 </body>
 </html>
