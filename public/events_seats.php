@@ -20,10 +20,26 @@ try {
 
     // Obtén el resultado
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($result) {
-        $totalSeats = $result['total_seats']; // Total de asientos del evento
-    } else {
+    if (!$result) {
         throw new Exception("Evento no encontrado.");
+    }
+
+    // Verificar si el evento tiene asientos numerados
+    $usesSeats = in_array($result['type'], [
+        'Concert',
+        'Theater',
+        'Opera',
+        'Cinema',
+        'Conference'
+    ]);
+
+    // Si el evento usa asientos, obtener los asientos de la base de datos
+    $seats = [];
+    if ($usesSeats) {
+        $seatStmt = $pdo->prepare("SELECT * FROM seats WHERE event_id = :eventId");
+        $seatStmt->bindParam(':eventId', $eventId, PDO::PARAM_INT);
+        $seatStmt->execute();
+        $seats = $seatStmt->fetchAll(PDO::FETCH_ASSOC);
     }
 } catch (Exception $e) {
     die("Error al obtener la información del evento: " . $e->getMessage());
@@ -56,59 +72,67 @@ try {
     <p><?php echo $_SESSION['user']['is_guest']; ?> </p>
 
     <!--Seats selection-->
-    <main class="seats-layout">
-        <!--Seats container-->
-        <div class="container" id="seats-grid" data-price="<?php echo $result['price']; ?>">
-            <?php
-            $columns = 10; // Número de columnas por fila
-            $alphabet = range('A', 'Z'); // Genera las letras de la A a la Z
-            $rowIndex = 0; // Índice para las filas
+    <?php if ($usesSeats): ?>
+        <main class="seats-layout">
+            <!--Seats container-->
+            <div class="container" id="seats-grid" data-price="<?php echo $result['price']; ?>">
+                <?php foreach ($seats as $seat): ?>
+                    <div class="seat <?php echo $seat['is_sold'] ? 'sold' : ''; ?>" 
+                        data-seat="<?php echo $seat['seat_label']; ?>" 
+                        data-sold="<?php echo $seat['is_sold']; ?>">
+                        <ion-icon name="person-outline"></ion-icon>
+                        <span><?php echo $seat['seat_label']; ?></span>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <!--Event Resume Panel-->
+            <aside class="summary-panel">
+                <img src="<?php echo $result['img']; ?>" alt="<?php echo $result['title']; ?>" class="event-image">
+                <h2><?php echo $result['title']; ?></h2>
+                <p><strong>Date:</strong> <?php echo date('F j, Y · g:i A', strtotime($result['event_date'])); ?></p>
+                <p><strong>Location:</strong> <?php echo $result['venue']; ?></p>
+                <p><strong>Type:</strong> <?php echo $result['type']; ?></p>
+                <p><strong>Price per seat:</strong> $<?php echo number_format($result['price'], 2); ?> MXN</p>
 
-            for ($i = 1; $i <= $totalSeats; $i++) {
-                // Calcula la fila actual
-                if (($i - 1) % $columns == 0 && $i > 1) {
-                    $rowIndex++;
-                }
+                <hr>
 
-                // Genera el nombre de la fila (A, B, ..., Z, AA, AB, ...)
-                $rowName = '';
-                $tempIndex = $rowIndex;
-                while ($tempIndex >= 0) {
-                    $rowName = $alphabet[$tempIndex % 26] . $rowName;
-                    $tempIndex = floor($tempIndex / 26) - 1;
-                }
+                <h3>Selected Seats</h3>
+                <ul id="selected-seats-list">
+                    <li>—</li>
+                </ul>
+                <p><strong>Total:</strong> <span id="total-price">0.00 MXN</span></p>
 
-                // Genera el asiento con el formato "Fila + Número"
-                $seatNumber = $i % $columns == 0 ? $columns : $i % $columns;
-                echo 
-                '<div class="seat" data-seat="' . $rowName . $seatNumber . '"> 
-                    <ion-icon name="person-outline"></ion-icon>
-                    <span>' . $rowName . $seatNumber . '</span>
-                </div>';
-            }
-            ?>
+                <button id="proceed-payment" class="btn" disabled>Proceed to Payment</button>
+            </aside>
+        </main>
+    <?php else: ?>
+        <div class="no-seats-layout">
+            <!--Event Resume Panel-->
+            <aside class="summary-panel">
+                <img src="<?php echo $result['img']; ?>" alt="<?php echo $result['title']; ?>" class="event-image">
+                <h2><?php echo $result['title']; ?></h2>
+                <p><strong>Date:</strong> <?php echo date('F j, Y · g:i A', strtotime($result['event_date'])); ?></p>
+                <p><strong>Location:</strong> <?php echo $result['venue']; ?></p>
+                <p><strong>Type:</strong> <?php echo $result['type']; ?></p>
+                <p><strong>Price per ticket:</strong> $<?php echo number_format($result['price'], 2); ?> MXN</p>
+                <p><strong>Stock available:</strong> <?php echo $result['total_seats']; ?> tickets</p>
+        
+                <hr>
+
+                <!--Ticket quantity spinner-->
+                <div class="custom-spinner" data-total-seats="<?php echo $result['total_seats']; ?>" data-price="<?php echo $result['price']; ?>">
+                    <button id="decrease-btn" class="spinner-btn">-</button>
+                    <span id="ticket-quantity-display">1</span>
+                    <button id="increase-btn" class="spinner-btn">+</button>
+                </div>
+        
+                <p><strong>Total:</strong> <span id="total-price">0.00 MXN</span></p>
+
+                <button id="proceed-payment" class="btn" disabled>Proceed to Payment</button>
+            </aside>
         </div>
+    <?php endif; ?>
 
-        <!--Event Resume Panel-->
-        <aside class="summary-panel">
-            <img src="<?php echo $result['img']; ?>" alt="<?php echo $result['title']; ?>" class="event-image">
-            <h2><?php echo $result['title']; ?></h2>
-            <p><strong>Date:</strong> <?php echo date('F j, Y · g:i A', strtotime($result['event_date'])); ?></p>
-            <p><strong>Location:</strong> <?php echo $result['venue']; ?></p>
-            <p><strong>Type:</strong> <?php echo $result['type']; ?></p>
-            <p><strong>Price per seat:</strong> $<?php echo number_format($result['price'], 2); ?> MXN</p>
-
-            <hr>
-
-            <h3>Selected Seats</h3>
-            <ul id="selected-seats-list">
-                <li>—</li>
-            </ul>
-            <p><strong>Total:</strong> <span id="total-price">0.00 MXN</span></p>
-
-            <button id="proceed-payment" class="btn" disabled>Proceed to Payment</button>
-        </aside>
-    </main>
     
 
     <!--Footer-->

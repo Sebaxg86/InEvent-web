@@ -7,6 +7,15 @@
     align-items: flex-start;
 }
 
+.no-seats-layout {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
+    gap: 20px;
+    margin: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
 .container{
     flex:2;
 
@@ -44,6 +53,58 @@
     cursor: pointer; /* Cambia el cursor al pasar por encima */
     transition: all 0.3s ease; /* Transición suave para hover */
 }
+
+.seat.sold {
+    background-color: #ff4d4d; /* Fondo rojo */
+    border-color: #cc0000; /* Borde rojo oscuro */
+    cursor: not-allowed; /* Cursor deshabilitado */
+    pointer-events: none; /* Deshabilita cualquier interacción */
+}
+
+.seat.sold ion-icon {
+    color: #fff; /* Ícono blanco */
+}
+
+.seat.sold span {
+    color: #fff; /* Texto blanco */
+}
+
+/* Spinner personalizado */
+.custom-spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+    font-size: 1.5rem;
+}
+
+.spinner-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.spinner-btn:hover {
+    background-color: #0056b3;
+}
+
+#ticket-quantity-display {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    width: 50px;
+    text-align: center;
+}
+
+
 
 /* Ícono dentro del asiento */
 .seat ion-icon {
