@@ -5,11 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const grid = document.getElementById('seats-grid'); // Solo para eventos con asientos numerados
     const spinnerContainer = document.querySelector('.custom-spinner'); // Solo para eventos sin asientos numerados
 
-    //Guest Elements
-    const isGuest = document.body.classList.contains('guest');
-    const guestEmailInput = document.getElementById('guest-email');
-    const guestEmailConfirmInput = document.getElementById('guest-email-confirm');
-
     // Verificar si el evento tiene asientos numerados
     const usesSeats = !!grid;
 

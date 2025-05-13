@@ -156,11 +156,11 @@ try {
                         <h4>Provide an email</h4><br>
                         <div class="guest-form">
                             <form>
-                                <label>Email:</label><br>
-                                <input type="email"><br><br>
-    
-                                <label>Confirm Email:</label><br>
-                                <input type="email"><br>
+                                <label for="guest-email">Email:</label>
+                                <input type="email" id="guest-email" name="guest-email" required>
+                                <br>
+                                <label for="guest-email-confirm">Confirm Email:</label>
+                                <input type="email" id="guest-email-confirm" name="guest-email-confirm" required>
                             </form>
                         </div>
                     </div>
@@ -180,6 +180,7 @@ try {
 
     <!--Scripts-->
     <script src="../js/events_seats.js"></script>
+    <script src="../js/guest_payment_logic.js"></script>
 <?php
 ?>
 </body>
