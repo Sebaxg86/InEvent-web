@@ -1,0 +1,19 @@
+.guest-container{
+    display: flex;
+    flex-direction: column; /* Alinea los elementos en columna */
+    justify-content: center; /* Centra los elementos verticalmente */
+    align-items: center; /* Centra los elementos horizontalmente */
+    text-align: center; /* Asegura que el texto esté centrado */
+    height: 100%; /* Asegúrate de que el contenedor ocupe todo el espacio disponible */
+}
+
+.guest-form{
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos del formulario también estén en columna */
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-payment{
+    margin-top: 2rem;
+}

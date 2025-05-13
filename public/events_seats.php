@@ -5,6 +5,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require_once '../config/database.php'; // Incluye la conexión a la base de datos
 
+//Determinar si el usuario está registrado
+$isGuest = !isset($_SESSION['user']);
+
 // Obtén el ID del evento desde la URL
 $eventId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
@@ -56,13 +59,14 @@ try {
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/events.css">
     <link rel="stylesheet" href="css/events_seats.css">
+    <link rel="stylesheet" href="css/guest.css">
 
     <!--Fonts-->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     
     <title>InEvent</title>
 </head>
-<body>
+<body class="<?php echo $isGuest ? 'guest' : 'logged-in'; ?>">
     <!--Header-->
     <?php include_once '../includes/header.php'; ?>
 
@@ -101,8 +105,24 @@ try {
                     <li>—</li>
                 </ul>
                 <p><strong>Total:</strong> <span id="total-price">0.00 MXN</span></p>
+                <?php if($isGuest): ?>
+                    <hr>
 
-                <button id="proceed-payment" class="btn" disabled>Proceed to Payment</button>
+                    <div class="guest-container">
+                        <h3>Purchasing as a Guest?</h3>
+                        <h4>Provide an your email</h4><br>
+                        <div class="guest-form">
+                            <form id="guest-checkout-form">
+                                <label for="guest-email">Email:</label><br>
+                                <input type="email" id="guest-email" required><br><br>
+    
+                                <label for="guest-email-confirm">Confirm Email:</label><br>
+                                <input type="email" id="guest-email-confirm" required><br>
+                            </form>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <button id="proceed-payment" class="btn btn-payment" disabled>Proceed to Payment</button>
             </aside>
         </main>
     <?php else: ?>
@@ -127,13 +147,29 @@ try {
                 </div>
         
                 <p><strong>Total:</strong> <span id="total-price">0.00 MXN</span></p>
+                
+                <?php if($isGuest): ?>
+                    <hr>
+
+                    <div class="guest-container">
+                        <h3>Purchasing as a Guest?</h3>
+                        <h4>Provide an email</h4><br>
+                        <div class="guest-form">
+                            <form>
+                                <label>Email:</label><br>
+                                <input type="email"><br><br>
+    
+                                <label>Confirm Email:</label><br>
+                                <input type="email"><br>
+                            </form>
+                        </div>
+                    </div>
+                <?php endif; ?>
 
                 <button id="proceed-payment" class="btn" disabled>Proceed to Payment</button>
             </aside>
         </div>
     <?php endif; ?>
-
-    
 
     <!--Footer-->
     <?php include_once "../includes/footer.php"; ?>
@@ -141,6 +177,8 @@ try {
     <!--Ionic Icons Installation-->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <!--Scripts-->
     <script src="../js/events_seats.js"></script>
 <?php
 ?>
