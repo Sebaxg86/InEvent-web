@@ -22,7 +22,7 @@
                 <option value="Opera">Opera</option>
                 <option value="Conference">Conference</option>
                 <option value="Marathon">Marathon</option>
-                <option value="Anime Convention">Anime Convention</option>
+                <option value="Convention">Convention</option>
                 <option value="Formula 1">Formula 1</option>
             </select>
             <br>

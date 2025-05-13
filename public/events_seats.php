@@ -53,6 +53,8 @@ try {
     <!--Navbar-->
     <?php include_once '../includes/navbar.php'; ?>
 
+    <p><?php echo $_SESSION['user']['is_guest']; ?> </p>
+
     <!--Seats selection-->
     <main class="seats-layout">
         <!--Seats container-->
