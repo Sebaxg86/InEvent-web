@@ -17,9 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Función para actualizar el panel de resumen en eventos con asientos numerados
         function updateSelectionInfo() {
-            selectedSeatsList.innerHTML = selectedSeats.length
-                ? selectedSeats.map(seat => `<li>${seat}</li>`).join('')
-                : '<li>—</li>';
+            selectedSeatsList.textContent = selectedSeats.length
+                ? selectedSeats.join(', ')
+                : '—';
             totalPriceDisplay.textContent = (selectedSeats.length * seatPrice).toFixed(2) + ' MXN';
             payBtn.disabled = selectedSeats.length === 0;
         }
