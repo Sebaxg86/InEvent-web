@@ -24,6 +24,7 @@
                 <option value="Marathon">Marathon</option>
                 <option value="Convention">Convention</option>
                 <option value="Formula 1">Formula 1</option>
+                <option value="Party">Party</option>
             </select>
             <br>
     
