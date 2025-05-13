@@ -180,7 +180,7 @@ try {
 
     <!--Scripts-->
     <script src="../js/events_seats.js"></script>
-    <script src="../js/guest_payment_logic.js"></script>
+    <script src="../js/guest_noSeats_payment_logic.js"></script>
 <?php
 ?>
 </body>
