@@ -13,8 +13,8 @@ if ($eventId === 0) {
 }
 
 try {
-    // Consulta para obtener el total de asientos del evento
-    $stmt = $pdo->prepare("SELECT total_seats FROM events WHERE id = :eventId");
+    // Consulta para obtener toda la información del evento
+    $stmt = $pdo->prepare("SELECT * FROM events WHERE id = :eventId");
     $stmt->bindParam(':eventId', $eventId, PDO::PARAM_INT);
     $stmt->execute();
 
@@ -26,10 +26,8 @@ try {
         throw new Exception("Evento no encontrado.");
     }
 } catch (Exception $e) {
-    die("Error al obtener el total de asientos: " . $e->getMessage());
+    die("Error al obtener la información del evento: " . $e->getMessage());
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -56,9 +54,9 @@ try {
     <?php include_once '../includes/navbar.php'; ?>
 
     <!--Seats selection-->
-    
-    <main>
-        <div class="container">
+    <main class="seats-layout">
+        <!--Seats container-->
+        <div class="container" id="seats-grid" data-price="<?php echo $result['price']; ?>">
             <?php
             $columns = 10; // Número de columnas por fila
             $alphabet = range('A', 'Z'); // Genera las letras de la A a la Z
@@ -81,13 +79,33 @@ try {
                 // Genera el asiento con el formato "Fila + Número"
                 $seatNumber = $i % $columns == 0 ? $columns : $i % $columns;
                 echo 
-                '<div class="seat"> 
+                '<div class="seat" data-seat="' . $rowName . $seatNumber . '"> 
                     <ion-icon name="person-outline"></ion-icon>
-                    ' . $rowName . $seatNumber . '
+                    <span>' . $rowName . $seatNumber . '</span>
                 </div>';
             }
             ?>
         </div>
+
+        <!--Event Resume Panel-->
+        <aside class="summary-panel">
+            <img src="<?php echo $result['img']; ?>" alt="<?php echo $result['title']; ?>" class="event-image">
+            <h2><?php echo $result['title']; ?></h2>
+            <p><strong>Date:</strong> <?php echo date('F j, Y · g:i A', strtotime($result['event_date'])); ?></p>
+            <p><strong>Location:</strong> <?php echo $result['venue']; ?></p>
+            <p><strong>Type:</strong> <?php echo $result['type']; ?></p>
+            <p><strong>Price per seat:</strong> $<?php echo number_format($result['price'], 2); ?> MXN</p>
+
+            <hr>
+
+            <h3>Selected Seats</h3>
+            <ul id="selected-seats-list">
+                <li>—</li>
+            </ul>
+            <p><strong>Total:</strong> <span id="total-price">0.00 MXN</span></p>
+
+            <button id="proceed-payment" class="btn" disabled>Proceed to Payment</button>
+        </aside>
     </main>
     
 
@@ -97,6 +115,7 @@ try {
     <!--Ionic Icons Installation-->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="../js/events_seats.js"></script>
 <?php
 ?>
 </body>

@@ -1,16 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     const seats = document.querySelectorAll('.seat');
-    const selectedSeatsDisplay = document.getElementById('selected-seats');
+    const selectedSeatsList = document.getElementById('selected-seats-list');
     const totalPriceDisplay = document.getElementById('total-price');
-    const grid      = document.getElementById('seats-grid');
+    const grid = document.getElementById('seats-grid');
     const seatPrice = grid ? parseFloat(grid.dataset.price) : 0;
-    const payBtn    = document.getElementById('proceed-payment');
+    const payBtn = document.getElementById('proceed-payment');
     let selectedSeats = [];
 
     seats.forEach(seat => {
         seat.addEventListener('click', () => {
             if (seat.classList.contains('sold')) {
-                return; // already taken
+                return;
             }
             const seatCode = seat.getAttribute('data-seat');
             if (selectedSeats.includes(seatCode)) {
@@ -25,8 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function updateSelectionInfo() {
-        selectedSeatsDisplay.textContent = selectedSeats.length ? selectedSeats.join(', ') : '—';
+        // Actualiza la lista de asientos seleccionados
+        selectedSeatsList.innerHTML = selectedSeats.length
+            ? selectedSeats.map(seat => `<li>${seat}</li>`).join('')
+            : '<li>—</li>';
+
+        // Actualiza el precio total
         totalPriceDisplay.textContent = (selectedSeats.length * seatPrice).toFixed(2) + ' MXN';
+
+        // Habilita o deshabilita el botón de pago
         if (payBtn) {
             payBtn.disabled = selectedSeats.length === 0;
         }
