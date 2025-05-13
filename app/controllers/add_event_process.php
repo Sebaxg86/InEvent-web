@@ -23,7 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Verificamos si el evento tiene asientos numerados
         if ($type === 'Concert' || $type === 'Opera' ||
-            $type === 'Theater' || $type === 'Conference') { // Ajusta los tipos según tu lógica
+            $type === 'Theater' || $type === 'Conference' ||
+            $type === 'Cinema') { // Ajusta los tipos según tu lógica
             $columns = 10; // Número de columnas por fila
             $alphabet = range('A', 'Z'); // Genera las letras de la A a la Z
             $rowIndex = 0; // Índice para las filas

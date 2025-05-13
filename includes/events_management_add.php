@@ -19,6 +19,7 @@
                 <option value="Concert">Concert (With Seats)</option>
                 <option value="Concert (Standing)">Concert (Standing)</option>
                 <option value="Theater">Theater</option>
+                <option value="Cinema">Cinema</option>
                 <option value="Opera">Opera</option>
                 <option value="Conference">Conference</option>
                 <option value="Marathon">Marathon</option>
