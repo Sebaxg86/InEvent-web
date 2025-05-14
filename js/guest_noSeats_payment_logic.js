@@ -32,8 +32,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json();
 
             if (response.ok) {
-                alert('Compra realizada con éxito. Revisa tu correo para más detalles.');
-                window.location.href = `/confirmation.php?order_id=${result.orderId}`;
+                document.body.innerHTML = `
+        <div style="text-align: center; margin-top: 20%;">
+            <h2>Por favor complete el pago, no cierre esta ventana</h2>
+            <div style="margin: 20px auto; width: 50px; height: 50px; border: 5px solid #ccc; border-top: 5px solid #007bff; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+        </div>
+        <style>
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
+    `;
+    window.location.href = result.approvalUrl;
             } else {
                 alert(`Error: ${result.message}`);
             }
