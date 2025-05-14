@@ -180,12 +180,18 @@ try {
 
     <!--Scripts-->
     <script src="../js/events_seats.js"></script>
-    <?php if ($usesSeats): ?>
-        <script src="../js/guest_seated_payment_logic.js"></script>
+    <?php if ($isGuest): ?>
+        <?php if ($usesSeats): ?>
+            <script src="../js/guest_seated_payment_logic.js"></script>
+        <?php else: ?>
+            <script src="../js/guest_noSeats_payment_logic.js"></script>
+        <?php endif; ?>
     <?php else: ?>
-        <script src="../js/guest_noSeats_payment_logic.js"></script>
+        <?php if ($usesSeats): ?>
+            <script src="../js/client_seated_payment_logic.js"></script>
+        <?php else: ?>
+            <script src="../js/client_noSeats_payment_logic.js"></script>
+        <?php endif; ?>
     <?php endif; ?>
-<?php
-?>
 </body>
 </html>
