@@ -1,0 +1,13 @@
+{
+    "name": "sebaschairez/in-event-web",
+    "description": "A web application for managing events and ticket purchases.",
+    "authors": [
+        {
+            "name": "Sebastian Chairez",
+            "email": "sebax86@icloud.com"
+        }
+    ],
+    "require": {
+        "paypal/paypal-server-sdk": "^1.0"
+    }
+}
