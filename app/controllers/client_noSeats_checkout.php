@@ -1,4 +1,5 @@
 <?php
+require_once '../../config/env.php';
 require_once '../../config/database.php';
 
 header('Content-Type: application/json');
@@ -68,12 +69,91 @@ try {
         throw new Exception('No hay suficientes boletos disponibles.');
     }
 
+    // 4. Obtener token de PayPal mediante cURL
+    $clientId     = env('PAYPAL_CLIENT_ID');
+    $clientSecret = env('PAYPAL_SECRET_KEY');
+    $tokenUrl     = "https://api-m.sandbox.paypal.com/v1/oauth2/token";
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $tokenUrl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_USERPWD, $clientId . ":" . $clientSecret);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        "Accept: application/json",
+        "Accept-Language: en_US"
+    ]);
+    $tokenResponse = curl_exec($ch);
+    if (curl_errno($ch)) {
+        throw new Exception("Error cURL (token): " . curl_error($ch));
+    }
+    curl_close($ch);
+    $tokenData   = json_decode($tokenResponse, true);
+    $accessToken = $tokenData['access_token'] ?? null;
+    if (!$accessToken) {
+        throw new Exception("No se pudo obtener token de PayPal.");
+    }
+
+    // 5. Crear la orden en PayPal
+    // Utilizamos APP_URL para formar las URLs absolutas
+    $baseUrl = env('APP_URL'); 
+    $orderPayload = json_encode([
+        "intent" => "CAPTURE",
+        "purchase_units" => [
+            [
+                "amount" => [
+                    "currency_code" => "USD",
+                    "value"         => $totalPrice,
+                ],
+                "description" => "Compra de $ticketQuantity boletos para el evento $eventId"
+            ]
+        ],
+        "application_context" => [
+            "return_url" => "$baseUrl/app/controllers/paypal_success.php?order_id=$orderId",
+            "cancel_url" => "$baseUrl/app/controllers/paypal_cancel.php?order_id=$orderId"
+        ]
+    ]);
+
+    $orderUrl = "https://api-m.sandbox.paypal.com/v2/checkout/orders";
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $orderUrl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $orderPayload);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        "Content-Type: application/json",
+        "Authorization: Bearer $accessToken"
+    ]);
+    $orderResponse = curl_exec($ch);
+    if (curl_errno($ch)) {
+        throw new Exception("Error cURL (order creation): " . curl_error($ch));
+    }
+    curl_close($ch);
+    $orderData = json_decode($orderResponse, true);
+    
+    $approvalUrl = "";
+    if (isset($orderData['links']) && is_array($orderData['links'])) {
+        foreach ($orderData['links'] as $link) {
+            if ($link['rel'] === 'approve') {
+                $approvalUrl = $link['href'];
+                break;
+            }
+        }
+    }
+    if (empty($approvalUrl)) {
+        throw new Exception("No se obtuvo URL de aprobación de PayPal.");
+    }
+
     // Confirmar la transacción
     $pdo->commit();
 
-    echo json_encode(['message' => 'Compra realizada con éxito', 'orderId' => $orderId]);
+    // Retornar al front-end la URL de aprobación y el orderId
+    echo json_encode([
+        'approvalUrl' => $approvalUrl,
+        'orderId'     => $orderId
+    ]);
 } catch (Exception $e) {
-    // Revertir la transacción en caso de error
     $pdo->rollBack();
     http_response_code(500);
     echo json_encode(['message' => $e->getMessage()]);
