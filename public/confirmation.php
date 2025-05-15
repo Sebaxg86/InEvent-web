@@ -19,7 +19,7 @@ $orderId = htmlspecialchars($_GET['order_id']);
     <div class="container">
         <h1>Orden Completada</h1>
         <p>¡Gracias! Tu orden con ID <strong><?= $orderId ?></strong> se ha completado con éxito.</p>
-        <p><a href="/events.php">Volver a inicio</a></p>
+        <p><a href="events.php">Volver a inicio</a></p>
     </div>
 </body>
 </html>
