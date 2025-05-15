@@ -1,0 +1,133 @@
+/* ------------ THANK YOU MESSAGE --------------- */
+.thankyou-message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 30px;
+}
+
+
+
+/* ------------ CONTENEDOR PRINCIPAL ------------ */
+.container{
+    background:#ffffff;
+    max-width:980px;
+    margin:auto;
+    padding:2rem 2.5rem;
+    border-radius:14px;
+    box-shadow:0 8px 26px rgba(0,0,0,.15);
+    transition:transform .35s ease, box-shadow .35s ease;
+}
+.container:hover{
+    transform:translateY(-6px) scale(1.01);
+    box-shadow:0 16px 38px rgba(0,0,0,.22);
+}
+
+/* ------------ PANEL DE RESUMEN ------------ */
+.order-details{
+    border-left:4px solid #005bff;
+    padding-left:1rem;
+    margin-bottom:2rem;
+}
+.order-details h2{color:#005bff;margin-top:0}
+
+.details-details{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items:center;
+}
+
+/* ------------ TARJETAS ----------- */
+.tickets-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 2rem;
+}
+
+/* Cada ticket ocupa el 100% del ancho disponible */
+.ticket {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    flex: 0 0 100%;
+    width: 100%;
+    background: #f6f8ff;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    gap: 1rem;
+}
+.ticket:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+/* La imagen sigue limitada a un cuadrado */
+.ticket img {
+    width: 100%;
+    max-width: 150px;
+    height: 150px;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    object-fit: cover;
+}
+
+/* ------------ RESPONSIVE ------------ */
+@media(max-width:600px){
+    .tickets-container{flex-direction:column}
+    .ticket{flex:1 1 100%}
+}
+
+/* Estilos originales del botón */
+.btn-download {
+    margin: 4rem 3rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.8rem;
+    background: #005bff;
+    color: #fff;
+    font-weight: 600;
+    font-size: 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.25s ease, box-shadow 0.25s ease;
+    text-decoration: none;
+    position: relative;
+}
+/* Efecto hover "más cabrón": agrandar y sombra intensa */
+.btn-download:hover {
+    background: #003dbd;
+    transform: scale(1.05);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.10);
+}
+
+/* Efecto active: pulsación, reducción y cambio de fondo */
+.btn-download:active {
+    background: #002ba0;
+    transform: scale(0.98);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.btn-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20rem;
+}
+
+
+/* Shared icon styling inside the download buttons */
+.btn-download ion-icon{
+    font-size:1.4em;   /* keep icon big but proportional */
+    line-height:1;
+}

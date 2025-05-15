@@ -5,8 +5,6 @@ if (!isset($_GET['order_id']) || !isset($_GET['event_id'])) {
 $orderId = htmlspecialchars($_GET['order_id']);
 $eventIdForJoin = htmlspecialchars($_GET['event_id']);
 
-echo "<h1>El id del evento traido desde antes es: $eventIdForJoin</h1>";
-
 require_once '../config/database.php';
 
 // Consulta para obtener los detalles de la orden y el usuario
@@ -49,17 +47,16 @@ $stmt2->bindParam(':orderId', $orderId, PDO::PARAM_INT);
 $stmt2->bindParam(':eventId', $eventIdForJoin, PDO::PARAM_INT);
 $stmt2->execute();
 $tickets = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
 
     <!--Styles-->
+    <link rel="stylesheet" href="css/receipt_pdf.css?v=<?=time();?>">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/receipt_pdf.css">
 
     <!--Fonts-->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -67,39 +64,53 @@ $tickets = $stmt2->fetchAll(PDO::FETCH_ASSOC);
     <title>Order Receipt</title>
 </head>
 <body>
-    <h1>Thank you for your purchase! <strong>#<?= $orderDetails['order_id'] ?></strong></h1>
-    <h2>Your tickets:</h2>
+    <div class="thankyou-message">
+        <h1>Thank you for your purchase!</h1>
+    </div>
+
+    <div class="btn-container">
+        <button class="btn-download" onclick="window.location.href='index.php'"><ion-icon name="arrow-undo-outline" class="home"></ion-icon>Home</button>
+        <button id="save-pdf" class="btn-download">Save Receipt<ion-icon name="cloud-download-outline" class="save"></ion-icon></button>
+    </div>
 
     <div class="container">
         <div class="order-details">
             <h2>Order Details</h2>
-            <p><strong>Order ID:</strong> <?= $orderDetails['order_id'] ?></p>
-            <p><strong>Date:</strong> <?= $orderDetails['created_at'] ?></p>
-            <p><strong>Customer Name:</strong> <?= $orderDetails['customer_name'] ?></p>
-            <p><strong>Email:</strong> <?= $orderDetails['email'] ?></p>
-            <p><strong>Ticket Amount:</strong> <?= count($tickets) ?></p>
-            <p><strong>Payment Method:</strong> <?= ucfirst($orderDetails['payment_method']) ?></p>
-            <p><strong>Total Amount:</strong> $<?= $orderDetails['total'] ?></p>
-        </div>
-
-        <?php foreach($tickets as $ticket): ?>
-            <div class="ticket">
-                <h3>Ticket Details <?= (!empty($ticket['seat_label']) && $ticket['seat_label'] != '-') ? "(Seat: {$ticket['seat_label']})" : "" ?></h3>
-                <p><strong>Image:</strong> <img src="uploads/<?= $ticket['event_image'] ?>" alt="Event Image" width="80"></p>
-                <p><strong>Event:</strong> <?= $ticket['event_name'] ?></p>
-                <p><strong>Date:</strong> <?= $ticket['event_date'] ?></p>
-                <p><strong>Location:</strong> <?= $ticket['location'] ?></p>
-                <p><strong>Price:</strong> $<?= $ticket['price'] ?></p>
-                <p><strong>Ticket ID:</strong> <?= $ticket['ticket_id'] ?></p>
+            <div class="details-details">
+                <p><strong>Order ID:</strong> <?= $orderDetails['order_id'] ?></p>
+                <p><strong>Customer Name:</strong> <?= $orderDetails['customer_name'] ?></p>
+                <p><strong>Email:</strong> <?= $orderDetails['email'] ?></p>
+                <p><strong>Date:</strong> <?= $orderDetails['created_at'] ?></p>
+                <p><strong>Ticket Amount:</strong> <?= count($tickets) ?></p>
+                <p><strong>Payment Method:</strong> <?= ucfirst($orderDetails['payment_method']) ?></p>
+                <p><strong>Total Amount:</strong> $<?= $orderDetails['total'] ?></p>
             </div>
-        <?php endforeach; ?>
-
-        <p><a href="events.php">Volver a inicio</a></p>
+        </div>
+        <hr>
+        <div class="tickets-container">
+            <?php foreach($tickets as $ticket): ?>
+                <div class="ticket">
+                    <img src="<?= $ticket['event_image'] ?>" alt="Event Image" width="80">
+                    <h3>Seat:<?= (!empty($ticket['seat_label']) && $ticket['seat_label'] != '-') ? " {$ticket['seat_label']}" : "" ?></h3>
+                    <p><strong>Event:</strong> <?= $ticket['event_name'] ?></p>
+                    <p><strong>Date:</strong> <?= $ticket['event_date'] ?></p>
+                    <p><strong>Location:</strong> <?= $ticket['location'] ?></p>
+                    <p><strong>Price:</strong> $<?= $ticket['price'] ?></p>
+                    <p><strong>Ticket ID:</strong> <?= $ticket['ticket_id'] ?></p>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
 
-    <!-- Incluir la librería html2pdf.js vía CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- html2canvas para capturar el contenido -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- jsPDF para generar el PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <!-- Incluir el archivo de lógica para generar PDF -->
-    <script src="receipt_pdf_logic.js"></script>
+    <script src="../js/receipt_pdf.js"></script>
+    
+    <!--Ionic Icons Installation-->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
