@@ -4,297 +4,193 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "133aea774103fd75eb5c7591168abbd3",
+    "content-hash": "94b6b253340f19d884b0c4e910eeb276",
     "packages": [
         {
-            "name": "apimatic/core",
-            "version": "0.3.14",
+            "name": "dompdf/dompdf",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/apimatic/core-lib-php.git",
-                "reference": "c3eaad6cf0c00b793ce6d9bee8b87176247da582"
+                "url": "https://github.com/dompdf/dompdf.git",
+                "reference": "a51bd7a063a65499446919286fb18b518177155a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/apimatic/core-lib-php/zipball/c3eaad6cf0c00b793ce6d9bee8b87176247da582",
-                "reference": "c3eaad6cf0c00b793ce6d9bee8b87176247da582",
+                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/a51bd7a063a65499446919286fb18b518177155a",
+                "reference": "a51bd7a063a65499446919286fb18b518177155a",
                 "shasum": ""
             },
             "require": {
-                "apimatic/core-interfaces": "~0.1.5",
-                "apimatic/jsonmapper": "^3.1.1",
-                "ext-curl": "*",
+                "dompdf/php-font-lib": "^1.0.0",
+                "dompdf/php-svg-lib": "^1.0.0",
                 "ext-dom": "*",
-                "ext-json": "*",
-                "ext-libxml": "*",
-                "php": "^7.2 || ^8.0",
-                "php-jsonpointer/php-jsonpointer": "^3.0.2",
-                "psr/log": "^1.1.4 || ^2.0.0 || ^3.0.0"
+                "ext-mbstring": "*",
+                "masterminds/html5": "^2.0",
+                "php": "^7.1 || ^8.0"
             },
             "require-dev": {
-                "phan/phan": "5.4.5",
-                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5",
-                "squizlabs/php_codesniffer": "^3.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Core\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Core logic and the utilities for the Apimatic's PHP SDK",
-            "homepage": "https://github.com/apimatic/core-lib-php",
-            "keywords": [
-                "apimatic",
-                "core",
-                "corelib",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/apimatic/core-lib-php/issues",
-                "source": "https://github.com/apimatic/core-lib-php/tree/0.3.14"
-            },
-            "time": "2025-02-27T06:03:30+00:00"
-        },
-        {
-            "name": "apimatic/core-interfaces",
-            "version": "0.1.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/apimatic/core-interfaces-php.git",
-                "reference": "b4f1bffc8be79584836f70af33c65e097eec155c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/apimatic/core-interfaces-php/zipball/b4f1bffc8be79584836f70af33c65e097eec155c",
-                "reference": "b4f1bffc8be79584836f70af33c65e097eec155c",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2 || ^8.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "CoreInterfaces\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Definition of the behavior of apimatic/core, apimatic/unirest-php and Apimatic's PHP SDK",
-            "homepage": "https://github.com/apimatic/core-interfaces-php",
-            "keywords": [
-                "apimatic",
-                "core",
-                "corelib",
-                "interface",
-                "php",
-                "unirest"
-            ],
-            "support": {
-                "issues": "https://github.com/apimatic/core-interfaces-php/issues",
-                "source": "https://github.com/apimatic/core-interfaces-php/tree/0.1.5"
-            },
-            "time": "2024-05-09T06:32:07+00:00"
-        },
-        {
-            "name": "apimatic/jsonmapper",
-            "version": "3.1.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/apimatic/jsonmapper.git",
-                "reference": "c6cc21bd56bfe5d5822bbd08f514be465c0b24e7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/apimatic/jsonmapper/zipball/c6cc21bd56bfe5d5822bbd08f514be465c0b24e7",
-                "reference": "c6cc21bd56bfe5d5822bbd08f514be465c0b24e7",
-                "shasum": ""
-            },
-            "require": {
+                "ext-gd": "*",
                 "ext-json": "*",
-                "php": "^5.6 || ^7.0 || ^8.0"
+                "ext-zip": "*",
+                "mockery/mockery": "^1.3",
+                "phpunit/phpunit": "^7.5 || ^8 || ^9 || ^10 || ^11",
+                "squizlabs/php_codesniffer": "^3.5",
+                "symfony/process": "^4.4 || ^5.4 || ^6.2 || ^7.0"
             },
-            "require-dev": {
-                "phpunit/phpunit": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0",
-                "squizlabs/php_codesniffer": "^3.0.0"
+            "suggest": {
+                "ext-gd": "Needed to process images",
+                "ext-gmagick": "Improves image processing performance",
+                "ext-imagick": "Improves image processing performance",
+                "ext-zlib": "Needed for pdf stream compression"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "apimatic\\jsonmapper\\": "src/"
-                }
+                    "Dompdf\\": "src/"
+                },
+                "classmap": [
+                    "lib/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "OSL-3.0"
+                "LGPL-2.1"
             ],
             "authors": [
                 {
-                    "name": "Christian Weiske",
-                    "email": "christian.weiske@netresearch.de",
-                    "homepage": "http://www.netresearch.de/",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Mehdi Jaffery",
-                    "email": "mehdi.jaffery@apimatic.io",
-                    "homepage": "http://apimatic.io/",
-                    "role": "Developer"
+                    "name": "The Dompdf Community",
+                    "homepage": "https://github.com/dompdf/dompdf/blob/master/AUTHORS.md"
                 }
             ],
-            "description": "Map nested JSON structures onto PHP classes",
+            "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
+            "homepage": "https://github.com/dompdf/dompdf",
             "support": {
-                "email": "mehdi.jaffery@apimatic.io",
-                "issues": "https://github.com/apimatic/jsonmapper/issues",
-                "source": "https://github.com/apimatic/jsonmapper/tree/3.1.6"
+                "issues": "https://github.com/dompdf/dompdf/issues",
+                "source": "https://github.com/dompdf/dompdf/tree/v3.1.0"
             },
-            "time": "2024-11-28T09:15:32+00:00"
+            "time": "2025-01-15T14:09:04+00:00"
         },
         {
-            "name": "apimatic/unirest-php",
-            "version": "4.0.6",
+            "name": "dompdf/php-font-lib",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/apimatic/unirest-php.git",
-                "reference": "df38c93ffa71e8a1b7a075c2322c28cdfe8fe1f5"
+                "url": "https://github.com/dompdf/php-font-lib.git",
+                "reference": "6137b7d4232b7f16c882c75e4ca3991dbcf6fe2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/apimatic/unirest-php/zipball/df38c93ffa71e8a1b7a075c2322c28cdfe8fe1f5",
-                "reference": "df38c93ffa71e8a1b7a075c2322c28cdfe8fe1f5",
+                "url": "https://api.github.com/repos/dompdf/php-font-lib/zipball/6137b7d4232b7f16c882c75e4ca3991dbcf6fe2d",
+                "reference": "6137b7d4232b7f16c882c75e4ca3991dbcf6fe2d",
                 "shasum": ""
             },
             "require": {
-                "apimatic/core-interfaces": "^0.1.0",
-                "ext-curl": "*",
-                "ext-json": "*",
-                "php": "^7.2 || ^8.0"
+                "ext-mbstring": "*",
+                "php": "^7.1 || ^8.0"
             },
             "require-dev": {
-                "phan/phan": "5.4.2",
-                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5",
-                "squizlabs/php_codesniffer": "^3.5"
+                "symfony/phpunit-bridge": "^3 || ^4 || ^5 || ^6"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Unirest\\": "src/"
+                    "FontLib\\": "src/FontLib"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT"
+                "LGPL-2.1-or-later"
             ],
             "authors": [
                 {
-                    "name": "Mashape",
-                    "email": "opensource@mashape.com",
-                    "homepage": "https://www.mashape.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "APIMATIC",
-                    "email": "opensource@apimatic.io",
-                    "homepage": "https://www.apimatic.io",
-                    "role": "Developer"
+                    "name": "The FontLib Community",
+                    "homepage": "https://github.com/dompdf/php-font-lib/blob/master/AUTHORS.md"
                 }
             ],
-            "description": "Unirest PHP",
-            "homepage": "https://github.com/apimatic/unirest-php",
-            "keywords": [
-                "client",
-                "curl",
-                "http",
-                "https",
-                "rest"
-            ],
+            "description": "A library to read, parse, export and make subsets of different types of font files.",
+            "homepage": "https://github.com/dompdf/php-font-lib",
             "support": {
-                "email": "opensource@apimatic.io",
-                "issues": "https://github.com/apimatic/unirest-php/issues",
-                "source": "https://github.com/apimatic/unirest-php/tree/4.0.6"
+                "issues": "https://github.com/dompdf/php-font-lib/issues",
+                "source": "https://github.com/dompdf/php-font-lib/tree/1.0.1"
             },
-            "time": "2025-04-22T09:12:12+00:00"
+            "time": "2024-12-02T14:37:59+00:00"
         },
         {
-            "name": "paypal/paypal-server-sdk",
+            "name": "dompdf/php-svg-lib",
             "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/paypal/PayPal-PHP-Server-SDK.git",
-                "reference": "66fd3341bbffafe7d650fe7d9d2699fabf355e67"
+                "url": "https://github.com/dompdf/php-svg-lib.git",
+                "reference": "eb045e518185298eb6ff8d80d0d0c6b17aecd9af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paypal/PayPal-PHP-Server-SDK/zipball/66fd3341bbffafe7d650fe7d9d2699fabf355e67",
-                "reference": "66fd3341bbffafe7d650fe7d9d2699fabf355e67",
+                "url": "https://api.github.com/repos/dompdf/php-svg-lib/zipball/eb045e518185298eb6ff8d80d0d0c6b17aecd9af",
+                "reference": "eb045e518185298eb6ff8d80d0d0c6b17aecd9af",
                 "shasum": ""
             },
             "require": {
-                "apimatic/core": "~0.3.13",
-                "apimatic/core-interfaces": "~0.1.5",
-                "apimatic/unirest-php": "^4.0.0",
-                "ext-json": "*",
-                "php": "^7.2 || ^8.0"
+                "ext-mbstring": "*",
+                "php": "^7.1 || ^8.0",
+                "sabberworm/php-css-parser": "^8.4"
             },
             "require-dev": {
-                "phan/phan": "5.4.5",
-                "squizlabs/php_codesniffer": "^3.5"
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "PaypalServerSdkLib\\": "src/"
+                    "Svg\\": "src/Svg"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT"
+                "LGPL-3.0-or-later"
             ],
-            "description": "PayPal's SDK for interacting with the REST APIs",
-            "homepage": "https://github.com/paypal/PayPal-PHP-Server-SDK",
+            "authors": [
+                {
+                    "name": "The SvgLib Community",
+                    "homepage": "https://github.com/dompdf/php-svg-lib/blob/master/AUTHORS.md"
+                }
+            ],
+            "description": "A library to read, parse and export to PDF SVG files.",
+            "homepage": "https://github.com/dompdf/php-svg-lib",
             "support": {
-                "issues": "https://github.com/paypal/PayPal-PHP-Server-SDK/issues",
-                "source": "https://github.com/paypal/PayPal-PHP-Server-SDK/tree/1.0.0"
+                "issues": "https://github.com/dompdf/php-svg-lib/issues",
+                "source": "https://github.com/dompdf/php-svg-lib/tree/1.0.0"
             },
-            "time": "2025-03-24T18:44:18+00:00"
+            "time": "2024-04-29T13:26:35+00:00"
         },
         {
-            "name": "php-jsonpointer/php-jsonpointer",
-            "version": "v3.0.2",
+            "name": "masterminds/html5",
+            "version": "2.9.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/raphaelstolt/php-jsonpointer.git",
-                "reference": "4428f86c6f23846e9faa5a420c4ef14e485b3afb"
+                "url": "https://github.com/Masterminds/html5-php.git",
+                "reference": "f5ac2c0b0a2eefca70b2ce32a5809992227e75a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/4428f86c6f23846e9faa5a420c4ef14e485b3afb",
-                "reference": "4428f86c6f23846e9faa5a420c4ef14e485b3afb",
+                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/f5ac2c0b0a2eefca70b2ce32a5809992227e75a6",
+                "reference": "f5ac2c0b0a2eefca70b2ce32a5809992227e75a6",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4"
+                "ext-dom": "*",
+                "php": ">=5.3.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^1.11",
-                "phpunit/phpunit": "4.6.*"
+                "phpunit/phpunit": "^4.8.35 || ^5.7.21 || ^6 || ^7 || ^8 || ^9"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.7-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Rs\\Json": "src/"
+                "psr-4": {
+                    "Masterminds\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -303,50 +199,68 @@
             ],
             "authors": [
                 {
-                    "name": "Raphael Stolt",
-                    "email": "raphael.stolt@gmail.com",
-                    "homepage": "http://raphaelstolt.blogspot.com/"
+                    "name": "Matt Butcher",
+                    "email": "technosophos@gmail.com"
+                },
+                {
+                    "name": "Matt Farina",
+                    "email": "matt@mattfarina.com"
+                },
+                {
+                    "name": "Asmir Mustafic",
+                    "email": "goetas@gmail.com"
                 }
             ],
-            "description": "Implementation of JSON Pointer (http://tools.ietf.org/html/rfc6901)",
-            "homepage": "https://github.com/raphaelstolt/php-jsonpointer",
+            "description": "An HTML5 parser and serializer.",
+            "homepage": "http://masterminds.github.io/html5-php",
             "keywords": [
-                "json",
-                "json pointer",
-                "json traversal"
+                "HTML5",
+                "dom",
+                "html",
+                "parser",
+                "querypath",
+                "serializer",
+                "xml"
             ],
             "support": {
-                "issues": "https://github.com/raphaelstolt/php-jsonpointer/issues",
-                "source": "https://github.com/raphaelstolt/php-jsonpointer/tree/master"
+                "issues": "https://github.com/Masterminds/html5-php/issues",
+                "source": "https://github.com/Masterminds/html5-php/tree/2.9.0"
             },
-            "time": "2016-08-29T08:51:01+00:00"
+            "time": "2024-03-31T07:05:07+00:00"
         },
         {
-            "name": "psr/log",
-            "version": "3.0.2",
+            "name": "sabberworm/php-css-parser",
+            "version": "v8.8.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/php-fig/log.git",
-                "reference": "f16e1d5863e37f8d8c2a01719f5b34baa2b714d3"
+                "url": "https://github.com/MyIntervals/PHP-CSS-Parser.git",
+                "reference": "3de493bdddfd1f051249af725c7e0d2c38fed740"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/f16e1d5863e37f8d8c2a01719f5b34baa2b714d3",
-                "reference": "f16e1d5863e37f8d8c2a01719f5b34baa2b714d3",
+                "url": "https://api.github.com/repos/MyIntervals/PHP-CSS-Parser/zipball/3de493bdddfd1f051249af725c7e0d2c38fed740",
+                "reference": "3de493bdddfd1f051249af725c7e0d2c38fed740",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0.0"
+                "ext-iconv": "*",
+                "php": "^5.6.20 || ^7.0.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "5.7.27 || 6.5.14 || 7.5.20 || 8.5.41"
+            },
+            "suggest": {
+                "ext-mbstring": "for parsing UTF-8 CSS"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.x-dev"
+                    "dev-main": "9.0.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Psr\\Log\\": "src"
+                    "Sabberworm\\CSS\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -355,21 +269,29 @@
             ],
             "authors": [
                 {
-                    "name": "PHP-FIG",
-                    "homepage": "https://www.php-fig.org/"
+                    "name": "Raphael Schweikert"
+                },
+                {
+                    "name": "Oliver Klee",
+                    "email": "github@oliverklee.de"
+                },
+                {
+                    "name": "Jake Hotson",
+                    "email": "jake.github@qzdesign.co.uk"
                 }
             ],
-            "description": "Common interface for logging libraries",
-            "homepage": "https://github.com/php-fig/log",
+            "description": "Parser for CSS Files written in PHP",
+            "homepage": "https://www.sabberworm.com/blog/2010/6/10/php-css-parser",
             "keywords": [
-                "log",
-                "psr",
-                "psr-3"
+                "css",
+                "parser",
+                "stylesheet"
             ],
             "support": {
-                "source": "https://github.com/php-fig/log/tree/3.0.2"
+                "issues": "https://github.com/MyIntervals/PHP-CSS-Parser/issues",
+                "source": "https://github.com/MyIntervals/PHP-CSS-Parser/tree/v8.8.0"
             },
-            "time": "2024-09-11T13:17:53+00:00"
+            "time": "2025-03-23T17:59:05+00:00"
         }
     ],
     "packages-dev": [],
