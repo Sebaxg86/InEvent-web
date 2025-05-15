@@ -56,6 +56,11 @@ CREATE TABLE `order_items` (
   `price` decimal(8,2) DEFAULT NULL
 ) 
 
+ALTER TABLE `order_items`
+  ADD COLUMN `event_id` INT NOT NULL AFTER `seat_id`,
+  ADD CONSTRAINT `fk_order_items_event`
+FOREIGN KEY (`event_id`) REFERENCES `events`(`id`);
+
 -- --------------------------------------------------------
 
 --
