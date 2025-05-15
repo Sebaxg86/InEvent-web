@@ -56,11 +56,17 @@ CREATE TABLE `order_items` (
   `price` decimal(8,2) DEFAULT NULL
 ) 
 
-ALTER TABLE `order_items`
-  ADD COLUMN `event_id` INT NOT NULL AFTER `seat_id`,
-  ADD CONSTRAINT `fk_order_items_event`
-FOREIGN KEY (`event_id`) REFERENCES `events`(`id`);
+ALTER TABLE order_items
+  ADD COLUMN event_id INT NULL AFTER seat_id;
 
+UPDATE order_items oi
+JOIN seats s ON oi.seat_id = s.id
+SET oi.event_id = s.event_id
+WHERE oi.seat_id IS NOT NULL;
+
+ALTER TABLE order_items
+  ADD CONSTRAINT fk_order_items_event
+    FOREIGN KEY (event_id) REFERENCES events(id);
 -- --------------------------------------------------------
 
 --

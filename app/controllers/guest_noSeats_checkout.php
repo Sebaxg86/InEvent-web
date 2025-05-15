@@ -55,11 +55,12 @@ try {
 
     // 3. Registrar los boletos en la tabla `order_items`
     $insertOrderItemStmt = $pdo->prepare("
-        INSERT INTO order_items (order_id, seat_id, price) 
-        VALUES (:orderId, NULL, :seatPrice)
+        INSERT INTO order_items (order_id, seat_id, event_id, price) 
+        VALUES (:orderId, NULL, :eventId, :seatPrice)
     ");
     $seatPrice = $totalPrice / $ticketQuantity; // Precio por boleto
     $insertOrderItemStmt->bindParam(':orderId', $orderId, PDO::PARAM_INT);
+    $insertOrderItemStmt->bindParam(':eventId',  $eventId,   PDO::PARAM_INT);
     $insertOrderItemStmt->bindParam(':seatPrice', $seatPrice, PDO::PARAM_STR);
     for ($i = 0; $i < $ticketQuantity; $i++) {
         $insertOrderItemStmt->execute();

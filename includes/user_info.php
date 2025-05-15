@@ -12,7 +12,7 @@ $stmt = $pdo->prepare("
         o.total AS order_total,
         o.payment_method,
         oi.price AS ticket_price,
-        s.seat_label,
+        IFNULL(s.seat_label, 'General') AS seat_label,
         e.title AS event_title,
         e.event_date,
         e.venue AS event_venue,
@@ -20,7 +20,7 @@ $stmt = $pdo->prepare("
     FROM orders o
     LEFT JOIN order_items oi ON o.id = oi.order_id
     LEFT JOIN seats s ON oi.seat_id = s.id
-    LEFT JOIN events e ON s.event_id = e.id
+    LEFT JOIN events e ON e.id = COALESCE(s.event_id, oi.event_id)
     WHERE o.user_id = :userId
     ORDER BY o.created_at DESC
 ");
