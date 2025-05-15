@@ -1,0 +1,96 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4rem;
+    margin-top: 3rem;
+}
+
+.login-container p {
+    font-size: 1rem;
+    margin-top: 2rem;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff; /* Fondo blanco */
+    padding: 2rem; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra inicial */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+}
+
+.login-form:hover {
+    transform: translateY(-5px); /* Efecto de elevación */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Sombra más intensa */
+}
+
+/* Campos del formulario */
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-form input[type="email"]:focus,
+.login-form input[type="password"]:focus {
+    border-color: #007bff; /* Color azul al enfocar */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Sombra azul */
+    outline: none;
+}
+
+/* Botón de login */
+.login-form .btn {
+    background-color: #007bff; /* Azul brillante */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-form button.btn {
+    display: block;
+    margin: 20px auto 0; /* Centra horizontalmente con auto */
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-form button.btn:hover {
+    background-color: #0056b3;
+}
+
+.login-form button.btn:active {
+    transform: scale(0.95);
+}
+
+/* Enlace de registro */
+.login-form p a {
+    color: #6c63ff; /* Morado brillante */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.login-form p a:hover {
+    color: #4b47c8; /* Morado más oscuro */
+}
