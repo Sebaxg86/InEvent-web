@@ -126,7 +126,7 @@ try {
             ]
         ],
         "application_context" => [
-            "return_url" => "$baseUrl/app/controllers/paypal_success.php?order_id=$orderId",
+            "return_url" => "$baseUrl/app/controllers/paypal_success.php?order_id=$orderId&event_id=$eventId",
             "cancel_url" => "$baseUrl/app/controllers/paypal_cancel.php?order_id=$orderId"
         ]
     ]);

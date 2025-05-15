@@ -3,7 +3,9 @@ require_once '../../config/env.php';
 require_once '../../config/database.php';
 
 $orderId = $_GET['order_id'] ?? null;
+$eventId = $_GET['event_id'] ?? null;
 $paypalOrderId = $_GET['token'] ?? null; // PayPal envía el token (o id) en la URL
+
 
 if (!$orderId || !$paypalOrderId) {
     die("Datos inválidos.");
@@ -63,7 +65,7 @@ try {
 
         // Usamos APP_URL para construir la URL de redirección a confirmation.php (ubicado en public)
         $baseUrl = env('APP_URL');
-        header("Location: $baseUrl/public/confirmation.php?order_id=$orderId");
+        header("Location: $baseUrl/public/receipt_pdf.php?order_id=$orderId&event_id=$eventId");
         exit;
     } else {
         throw new Exception("La captura del pago falló.");
