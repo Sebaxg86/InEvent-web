@@ -2,8 +2,8 @@
     <h2>Create an Account</h2>
 </section>
 
-<div class="content-container">
-    <div class="content-form">
+<div class="register-container">
+    <div class="register-form">
         <form action="../app/controllers/register_process.php" method="post">
             <label for="fullname">Full Name:</label><br>
             <input type="text" id="fullname" name="fullname" required><br><br>
@@ -15,7 +15,7 @@
             <input type="password" id="password" name="password" required><br><br>
     
             <label for="confirm-password">Confirm Password:</label><br>
-            <input type="password" id="confirm-password" name="confirm-password" required><br><br>
+            <input type="password" id="confirm-password" name="confirm-password" required>
     
             <button class="btn" type="submit">Register</button>
         </form>
