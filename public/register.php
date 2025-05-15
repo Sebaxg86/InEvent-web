@@ -15,6 +15,7 @@ $form_type = $_GET['form'] ?? 'login'; // default = login
 
     <!--Styles-->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/user_info.css">
     <link rel="stylesheet" href="css/contact.css">
     <link rel="stylesheet" href="css/account.css">
 

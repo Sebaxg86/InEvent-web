@@ -11,6 +11,7 @@ $stmt = $pdo->prepare("
         o.created_at AS order_date,
         o.total AS order_total,
         o.payment_method,
+        oi.id AS ticket_id,
         oi.price AS ticket_price,
         IFNULL(s.seat_label, 'General') AS seat_label,
         e.title AS event_title,
@@ -33,46 +34,68 @@ $purchases = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <h2>Your Information</h2>
 </section>
 
-<div class="user-card">
-    <div class="card">
-        <div class="user-info">
-            <h3>Basic Information</h3>
-            <p><strong>Name:</strong> <?= htmlspecialchars($_SESSION['user']['name']) ?></p>
-            <p><strong>Email:</strong> <?= htmlspecialchars($_SESSION['user']['email']) ?></p>
+<div class="basic-info">
+    <div class="user-info">
+        <h3>Basic Information</h3>
+        <p><strong>Name:</strong> <?= htmlspecialchars($_SESSION['user']['name']) ?></p>
+        <p><strong>Email:</strong> <?= htmlspecialchars($_SESSION['user']['email']) ?></p>
+    
+        <!-- Logout button -->
+        <form action="../public/logout.php">
+            <div class="btn-div">
+                <button class="btn-danger">Logout</button>
+            </div>
+        </form>
+    </div>
+</div>
 
-            <!-- Logout button -->
-            <form action="../public/logout.php">
-                <div class="btn-div">
-                    <button class="btn-danger">Logout</button>
+<hr>
+
+<div class="purchases-title">
+    <h2>Purchases</h2>
+</div>
+
+<div class="purchases">
+    <div class="purchases-list">
+        <?php if (!empty($purchases)): ?>
+            <?php foreach ($purchases as $purchase): ?>
+                <div class="ticket-card">
+                    <img src="<?= htmlspecialchars($purchase['event_image']) ?>" alt="Event Image">
+                    <h4 class="event-title"><?= htmlspecialchars($purchase['event_title']) ?></h4>
+                    
+                    <div class="date">
+                        <p><strong>Date:</strong></p>
+                        <p><?= htmlspecialchars($purchase['event_date']) ?></p>
+                    </div>
+                
+                    <div class="venue">
+                        <p><strong>Venue:</strong></p>
+                        <p><?= htmlspecialchars($purchase['event_venue']) ?></p>
+                    </div>
+
+                    <div class="seat">
+                        <p><strong>Seat:</strong></p>
+                        <p><?= htmlspecialchars($purchase['seat_label']) ?></p>
+                    </div>
+                    
+                    <div class="price">
+                        <p><strong>Price:</strong></p>
+                        <p>$<?= htmlspecialchars($purchase['ticket_price']) ?></p>
+                    </div>
+
+                    <div class="order-id">
+                        <p><strong>Order ID:</strong></p>
+                        <p><?= htmlspecialchars($purchase['order_id']) ?></p>
+                    </div>
+
+                    <div class="ticket-id">
+                        <p><strong>Ticket ID:</strong></p>
+                        <p><?= htmlspecialchars($purchase['ticket_id']) ?></p>
+                    </div>
                 </div>
-            </form>
-        </div>
-        <hr>
-        <div class="user-purchases">
-            <h3>Purchases</h3>
-            <ul>
-                <?php if (!empty($purchases)): ?>
-                    <?php foreach ($purchases as $purchase): ?>
-                        <li>
-                            <strong>Order ID:</strong> <?= htmlspecialchars($purchase['order_id']) ?> |
-                            <strong>Date:</strong> <?= htmlspecialchars($purchase['order_date']) ?> |
-                            <strong>Total:</strong> $<?= htmlspecialchars($purchase['order_total']) ?>
-                            <br>
-                            <strong>Event:</strong> <?= htmlspecialchars($purchase['event_title']) ?> |
-                            <strong>Date:</strong> <?= htmlspecialchars($purchase['event_date']) ?> |
-                            <strong>Venue:</strong> <?= htmlspecialchars($purchase['event_venue']) ?>
-                            <br>
-                            <strong>Seat:</strong> <?= htmlspecialchars($purchase['seat_label']) ?> |
-                            <strong>Ticket Price:</strong> $<?= htmlspecialchars($purchase['ticket_price']) ?>
-                            <br>
-                            <img src="<?= htmlspecialchars($purchase['event_image']) ?>" alt="Event Image" width="100">
-                        </li>
-                        <hr>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <li>No purchases found.</li>
-                <?php endif; ?>
-            </ul>
-        </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No purchases found.</p>
+        <?php endif; ?>
     </div>
 </div>
