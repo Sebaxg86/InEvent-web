@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Mostrar la pantalla de espera
                 document.body.innerHTML = `
                     <div style="text-align: center; margin-top: 20%;">
-                        <h2>Por favor, complete el pago en PayPal. No cierre esta ventana.</h2>
+                        <h2>Redireccionando a Paypal.</h2>
                         <div style="margin: 20px auto; width: 50px; height: 50px; border: 5px solid #ccc; border-top: 5px solid #007bff; border-radius: 50%; animation: spin 1s linear infinite;"></div>
                     </div>
                     <style>
