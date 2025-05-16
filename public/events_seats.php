@@ -74,8 +74,6 @@ try {
     <!--Navbar-->
     <?php include_once '../includes/navbar.php'; ?>
 
-    <p><?php echo $_SESSION['user']['is_guest']; ?> </p>
-
     <!--Seats selection-->
     <?php if ($usesSeats): ?>
         <main class="seats-layout">
