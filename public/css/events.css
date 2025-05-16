@@ -2,67 +2,106 @@
     text-align: center;
     font-size: 2rem;
     margin-top: 2rem;
+    position: sticky; 
+    top:130px; 
+    z-index: 10; 
+    background: rgba(255, 255, 255, 0.3); 
+    backdrop-filter: blur(10px);
 }
 
 .events-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-rows: auto; /* Cada evento ocupa un renglón */
     gap: 2rem;
-    max-width: 1200px;
-    margin: 2rem auto 4rem;
+    margin: 2rem auto;
     padding: 0 1rem;
   }
   
   .event-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    height: 100%;
-    transition: transform 0.3s ease;
-  }
-  
-  .event-card:hover {
-    transform: translateY(-8px);
-  }
-  
-  .event-card img {
+    position: relative;
     width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 1rem;
+    height: 400px; /* Altura fija para las tarjetas */
+    overflow: hidden;
+    border-radius: 10px;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
+
+  /* Hover en la tarjeta */
+.event-card:hover {
+    transform: translateY(-10px); /* Eleva la tarjeta */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra más intensa */
+}
   
-  .event-card h3 {
-    font-size: 1.4rem;
-    margin: 1rem 0 0.5rem;
-  }
+  /* Imagen del evento */
+.event-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen cubra todo el espacio */
+    filter: brightness(70%); /* Oscurece ligeramente la imagen */
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Hover en la imagen */
+.event-card:hover img {
+    transform: scale(1.1); /* Zoom en la imagen */
+    filter: brightness(50%); /* Oscurece más la imagen */
+}
+
+/* Panel de información */
+.event-card .event-info {
+    position: absolute;
+    top: 50%; /* Centra el panel verticalmente */
+    left: 50%; /* Centra el panel horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta el centro exacto */
+    background: rgba(255, 255, 255, 0.3); /* Fondo blanco con transparencia */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+    padding: 1.5rem 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra para resaltar el panel */
+    max-width: 600px;
+    width: 90%;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hover en el panel */
+.event-card:hover .event-info {
+    transform: translate(-50%, -50%) scale(1.05); /* Amplía ligeramente el panel */
+    background: rgba(255, 255, 255, 0.85); /* Aumenta la opacidad del fondo */
+}
   
-  .event-card p {
+/* Título del evento */
+.event-card .event-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+/* Información del evento */
+.event-card .event-info p {
     margin: 0.3rem 0;
     font-size: 1rem;
-  }
-  
-  .event-card button {
-    margin-top: auto;
-    background-color: #0044ff;
+    color: #555;
+}
+
+/* Botón */
+.event-card .event-info a {
+    display: inline-block;
+    margin-top: 1rem;
+    background-color: #007bff;
     color: white;
-    border: none;
     padding: 0.8rem 2rem;
-    border-radius: 6px;
-    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
     font-weight: bold;
-    transition: background-color 0.3s ease;
-  }
-  
-  .event-card button:hover {
-    background-color: #0033cc;
-  }
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.event-card .event-info a:hover {
+    background-color: #0056b3;
+    transform: scale(1.1); /* Amplía ligeramente el botón */
+}
 
   .content-container{
     display: flex;
@@ -101,4 +140,10 @@
 .btn-danger:hover{
   background-color: var(--hover-color-danger);
   transform: scale(1.05);
+}
+
+.events-container{
+  width: 100%; /* Asegura que ocupe todo el ancho */
+    padding: 0; /* Elimina cualquier padding interno */
+    margin: 0; /* Elimina márgenes externos */
 }
