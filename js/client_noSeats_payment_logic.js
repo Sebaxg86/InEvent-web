@@ -2,10 +2,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const payBtn = document.getElementById('proceed-payment');
     const eventId = new URLSearchParams(window.location.search).get('id'); // Obtener el ID del evento desde la URL
 
+    // Función para mostrar el modal de error
+    function showError(message) {
+        const errorPopup = document.getElementById('error-popup');
+        const errorMessage = document.getElementById('error-message');
+        if (errorPopup && errorMessage) {
+            errorMessage.innerText = message;
+            errorPopup.style.display = 'block';
+        } else {
+            console.error('Error popup elements not found.');
+        }
+    }
+    
+    // Cerrar el popup cuando se hace clic en la "X"
+    document.querySelector('.error-popup-close').addEventListener('click', function () {
+        document.getElementById('error-popup').style.display = 'none';
+    });
+    
+    // Cerrar el popup si se hace clic fuera del contenido
+    window.addEventListener('click', function (event) {
+        const popup = document.getElementById('error-popup');
+        if (event.target === popup) {
+            popup.style.display = 'none';
+        }
+    });
+
     async function handlePayment() {
         // Validar que haya boletos seleccionados
         if (window.ticketQuantity <= 0) {
-            alert('Por favor, selecciona al menos un boleto.');
+            showError('Por favor, selecciona al menos un boleto.');
             return;
         }
 
@@ -42,11 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Redirigir al usuario a la URL de aprobación de PayPal
                 window.location.href = result.approvalUrl;
             } else {
-                alert(`Error: ${result.message}`);
+                showError(`Error: ${result.message}`);
             }
         } catch (error) {
             console.error('Error al procesar el pago:', error);
-            alert('Ocurrió un error al procesar el pago. Inténtalo de nuevo más tarde.');
+            showError('Ocurrió un error al procesar el pago. Inténtalo de nuevo más tarde.');
         }
     }
 
