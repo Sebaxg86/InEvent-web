@@ -12,7 +12,8 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <!--Styles-->
     <link rel="stylesheet" href="css/styles.css">
-
+    <link rel="stylesheet" href="css/carousel.css">
+    
     <!--Fonts-->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     
@@ -34,20 +35,32 @@ if (session_status() === PHP_SESSION_NONE) {
             <p>Discover unforgettable moments. Book your tickets now, wherever you are.</p>
         </section>
     
-        <!-- Carousel -->
-        <section class="carousel">
-            <div class="carousel-track">
-                <img src="assets/img/concert.png" alt="Concert" class="carousel-img">
-                <img src="assets/img/convention.png" alt="Travel" class="carousel-img">
-                <img src="assets/img/Flight.png" alt="Event" class="carousel-img">
-            </div>
-            <button class="carousel-btn prev">&#10094;</button>
-            <button class="carousel-btn next">&#10095;</button>
-        </section>
+<!---- CAROUSEL – PEGAR DENTRO DEL <body> --->
+<section class="hero-carousel" aria-label="Galería promocional">
+  <div class="carousel-track">
+    <!-- 6 imág.  (reemplaza data-src por tu URL) -->
+    <figure class="slide" data-src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/10/7f/97/24.jpg"  aria-label="Imagen 1"></figure>
+    <figure class="slide" data-src="https://cultivarte.mx/wp-content/uploads/2023/10/i-virtuosi-dell-opera.jpg"  aria-label="Imagen 2"></figure>
+    <figure class="slide" data-src="https://s.abcnews.com/images/GMA/rufus-du-soul-01-ht-llr-221011_1665534667674_hpMain.jpg"  aria-label="Imagen 3"></figure>
+    <figure class="slide" data-src="https://world-masters-athletics.org/wp-content/uploads/2023/08/Bucharest_Marathon-scaled.jpg"  aria-label="Imagen 4"></figure>
+    <figure class="slide" data-src="https://i.ytimg.com/vi/hY23w-rbarI/maxresdefault.jpg"  aria-label="Imagen 5"></figure>
+    <figure class="slide" data-src="https://images.adsttc.com/media/images/58d5/3a58/e58e/ce48/a700/003f/large_jpg/002.jpg?1490369108"  aria-label="Imagen 6"></figure>
+  </div>
+
+  <!-- Puntitos de progreso -->
+  <div class="carousel-nav" role="tablist" aria-label="Paginación">
+    <button class="nav-dot" aria-label="Ir a la 1" role="tab"></button>
+    <button class="nav-dot" aria-label="Ir a la 2" role="tab"></button>
+    <button class="nav-dot" aria-label="Ir a la 3" role="tab"></button>
+    <button class="nav-dot" aria-label="Ir a la 4" role="tab"></button>
+    <button class="nav-dot" aria-label="Ir a la 5" role="tab"></button>
+    <button class="nav-dot" aria-label="Ir a la 6" role="tab"></button>
+  </div>
+</section>
 
         <!--View Catalog Button-->
         <div class="btn-div">
-            <button class="btn">View Catalog</button>
+            <button class="btn" id="view-catalog-btn">View Catalog</button>
         </div>
     
         <!--Features Section-->
@@ -100,5 +113,13 @@ if (session_status() === PHP_SESSION_NONE) {
     <!--Ionic Icons Installation-->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="js/carrousel.js"></script>
+
+    <script>
+    document.getElementById('view-catalog-btn').addEventListener('click', () => {
+        window.location.href = 'events.php'; // Redirige a events.php
+    });
+    </script>
+    <script src="../js/carrousel.js"></script>
 </body>
 </html>

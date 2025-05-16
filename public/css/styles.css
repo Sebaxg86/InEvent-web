@@ -103,46 +103,6 @@ header {
     margin-top: 0.5rem;
 }
 
-/* ========== CAROUSEL ========== */
-.carousel{
-    position:relative;
-    overflow: hidden;
-    max-width: 100%;
-    margin: 2rem auto;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.carousel-track {
-    display: flex;
-    justify-content: center;
-    transition: transform 0.5s ease;
-}
-
-.carousel-img {
-    width: 40%;
-    flex-shrink: 0;
-    object-fit: cover;
-}
-
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0,0,0,0.4);
-    color: white;
-    border: none;
-    padding: 0.75rem 1rem;
-    font-size: 2rem;
-    cursor: not-allowed; /* Temporaly */
-    opacity: 0.6;
-    border-radius: 8px;
-    z-index: 1;
-}
-
-.carousel-btn.prev { left: 15px; }
-.carousel-btn.next { right: 15px; }
-
 /* ========== BUTTONS ========== */
 .btn-div{
     display: flex;
