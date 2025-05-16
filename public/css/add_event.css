@@ -1,0 +1,97 @@
+
+.add-message {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.add-message h2 {
+    font-size: 2.5rem;
+    color: #343a40;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 1rem;
+}
+
+.add-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.add-form {
+    background: #fff;
+    max-width: 500px;
+    width: 100%;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.add-form form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #495057;
+}
+
+.add-form form input,
+.add-form form select {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.add-form form input:focus,
+.add-form form select:focus {
+    border-color: #80bdff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+}
+
+.add-form form button.btn,
+.add-form form a.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-right: 1rem;
+}
+
+.add-form form button.btn {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.add-form form button.btn:hover {
+    background-color: #218838;
+}
+
+.add-form form a.btn.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.add-form form a.btn.btn-danger:hover {
+    background-color: #c82333;
+}

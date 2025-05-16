@@ -2,8 +2,8 @@
     <h2>Add New Event</h2>
 </section>
 
-<section class="content-container">
-    <div class="content-form">
+<section class="add-container">
+    <div class="add-form">
         <form action="../app/controllers/add_event_process.php" method="POST">
             <label>Title:</label>
             <input type="text" name="title" required><br>
