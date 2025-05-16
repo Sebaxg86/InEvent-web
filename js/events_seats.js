@@ -1,31 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Elementos comunes
+    // ====== Common Elements ======
     const totalPriceDisplay = document.getElementById('total-price');
     const payBtn = document.getElementById('proceed-payment');
-    const grid = document.getElementById('seats-grid'); // Solo para eventos con asientos numerados
-    const spinnerContainer = document.querySelector('.custom-spinner'); // Solo para eventos sin asientos numerados
+    const grid = document.getElementById('seats-grid');               // For events with numbered seats
+    const spinnerContainer = document.querySelector('.custom-spinner'); // For events without numbered seats
 
-    // Variables globales para compartir datos con otros archivos
+    // ====== Global Variables (shared across files) ======
     window.selectedSeats = [];
     window.ticketQuantity = 1;
     window.totalPrice = 0;
 
-    // Verificar si el evento tiene asientos numerados
+    // ====== Check if Event Uses Numbered Seats ======
     const usesSeats = !!grid;
 
-    // Función para actualizar el total del precio
+    // ====== Function to Update Total Price Display ======
     function updateTotalPrice(price) {
         totalPriceDisplay.textContent = price.toFixed(2) + ' MXN';
-        window.totalPrice = price; // Actualizar el total global
+        window.totalPrice = price; // Update global total price
     }
 
-    // Variables para eventos con asientos numerados
+    // ====== Code for Events with Numbered Seats ======
     if (usesSeats) {
         const seats = document.querySelectorAll('.seat:not(.sold)');
         const selectedSeatsList = document.getElementById('selected-seats-list');
         const seatPrice = parseFloat(grid.dataset.price || 0);
 
-        // Función para actualizar el panel de resumen en eventos con asientos numerados
+        // ====== Function to Update Selection Summary ======
         function updateSelectionInfo() {
             selectedSeatsList.textContent = window.selectedSeats.length
                 ? window.selectedSeats.join(', ')
@@ -35,16 +35,16 @@ document.addEventListener('DOMContentLoaded', () => {
             payBtn.disabled = window.selectedSeats.length === 0;
         }
 
-        // Manejo de selección de asientos
+        // ====== Handle Seat Selection/Deselection ======
         seats.forEach(seat => {
             seat.addEventListener('click', () => {
                 const seatLabel = seat.getAttribute('data-seat');
                 if (window.selectedSeats.includes(seatLabel)) {
-                    // Deseleccionar asiento
+                    // ====== Deselect Seat ======
                     window.selectedSeats = window.selectedSeats.filter(s => s !== seatLabel);
                     seat.classList.remove('selected');
                 } else {
-                    // Seleccionar asiento
+                    // ====== Select Seat ======
                     window.selectedSeats.push(seatLabel);
                     seat.classList.add('selected');
                 }
@@ -52,19 +52,19 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Inicializar el resumen
+        // ====== Initialize Selection Summary ======
         updateSelectionInfo();
     }
 
-    // Variables para eventos sin asientos numerados
+    // ====== Code for Events without Numbered Seats ======
     if (!usesSeats) {
         const decreaseBtn = document.getElementById('decrease-btn');
         const increaseBtn = document.getElementById('increase-btn');
         const ticketQuantityDisplay = document.getElementById('ticket-quantity-display');
         const seatPrice = parseFloat(spinnerContainer?.dataset.price || 0);
-        const totalSeats = parseInt(spinnerContainer?.dataset.totalSeats || 0, 10); // Límite máximo de boletos
+        const totalSeats = parseInt(spinnerContainer?.dataset.totalSeats || 0, 10); // Maximum available tickets
 
-        // Función para actualizar el panel de resumen en eventos sin asientos numerados
+        // ====== Function to Update Ticket Summary ======
         function updateTicketInfo() {
             ticketQuantityDisplay.textContent = window.ticketQuantity;
             const total = window.ticketQuantity * seatPrice;
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
             payBtn.disabled = window.ticketQuantity === 0;
         }
 
-        // Disminuir cantidad
+        // ====== Decrease Ticket Quantity ======
         if (decreaseBtn) {
             decreaseBtn.addEventListener('click', () => {
                 if (window.ticketQuantity > 1) {
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Aumentar cantidad
+        // ====== Increase Ticket Quantity ======
         if (increaseBtn) {
             increaseBtn.addEventListener('click', () => {
                 if (window.ticketQuantity < totalSeats) {
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Inicializar el resumen
+        // ====== Initialize Ticket Summary ======
         updateTicketInfo();
     }
 });

@@ -5,7 +5,7 @@ session_start();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Compra Cancelada</title>
+    <title>Purchase Cancelled</title>
     <link rel="stylesheet" href="css/styles.css">
     <style>
         body {
@@ -49,9 +49,9 @@ session_start();
 </head>
 <body>
     <div class="container">
-        <h1>Compra Cancelada</h1>
-        <p>Tu compra ha sido cancelada exitosamente.</p>
-        <a href="events.php" class="btn">Regresar a Eventos</a>
+        <h1>Purchase cancelled</h1>
+        <p>Your purchase has been cancelled.</p>
+        <a href="events.php" class="btn">Home</a>
     </div>
 </body>
 </html>

@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ====== Retrieve Payment Button and Event ID ======
     const payBtn = document.getElementById('proceed-payment');
-    const eventId = new URLSearchParams(window.location.search).get('id'); // Obtener el ID del evento desde la URL
+    const eventId = new URLSearchParams(window.location.search).get('id'); // Get event ID from URL
 
-    // Función para mostrar el modal de error
+    // ====== Function to Display Error Modal ======
     function showError(message) {
         const errorPopup = document.getElementById('error-popup');
         const errorMessage = document.getElementById('error-message');
@@ -14,12 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Cerrar el popup cuando se hace clic en la "X"
+    // ====== Close Error Popup when "X" is Clicked ======
     document.querySelector('.error-popup-close').addEventListener('click', function () {
         document.getElementById('error-popup').style.display = 'none';
     });
     
-    // Cerrar el popup si se hace clic fuera del contenido
+    // ====== Close Error Popup if Clicked Outside the Popup Content ======
     window.addEventListener('click', function (event) {
         const popup = document.getElementById('error-popup');
         if (event.target === popup) {
@@ -27,31 +28,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // ====== Handle Payment Process using Fetch API ======
     async function handlePayment() {
-        // Validar que haya boletos seleccionados
+        // ====== Validate that at Least One Ticket is Selected ======
         if (window.ticketQuantity <= 0) {
             showError('Por favor, selecciona al menos un boleto.');
             return;
         }
 
         try {
-            // Enviar los datos al servidor
+            // ====== Send Payment Data to Server ======
             const response = await fetch('../app/controllers/client_noSeats_checkout.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    ticketQuantity: window.ticketQuantity, // Usar la variable global
-                    totalPrice: window.totalPrice, // Usar la variable global
+                    ticketQuantity: window.ticketQuantity, // Global variable: quantity of tickets
+                    totalPrice: window.totalPrice,           // Global variable: total price
                     eventId,
                 }),
             });
 
+            // ====== Process Server Response ======
             const result = await response.json();
 
             if (response.ok) {
-                // Mostrar pantalla de espera mientras se procesa el pago
+                // ====== Show Waiting Screen while Redirecting ======
                 document.body.innerHTML = `
                     <div style="text-align: center; margin-top: 20%;">
                         <h2>Redirecting to PayPal</h2>
@@ -64,17 +67,19 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     </style>
                 `;
-                // Redirigir al usuario a la URL de aprobación de PayPal
+                // ====== Redirect to PayPal Approval URL ======
                 window.location.href = result.approvalUrl;
             } else {
+                // ====== Display Error from Server Response ======
                 showError(`Error: ${result.message}`);
             }
         } catch (error) {
+            // ====== Handle Fetch or Network Errors ======
             console.error('Error al procesar el pago:', error);
             showError('Ocurrió un error al procesar el pago. Inténtalo de nuevo más tarde.');
         }
     }
 
-    // Asociar el evento de clic al botón de pago
+    // ====== Attach Click Event to Payment Button ======
     payBtn.addEventListener('click', handlePayment);
 });

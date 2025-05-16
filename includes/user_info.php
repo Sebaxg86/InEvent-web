@@ -1,10 +1,11 @@
 <?php
-require_once '../config/database.php'; // Conexión a la base de datos
+// PHP: Include the database connection
+require_once '../config/database.php';
 
-// Obtener el ID del usuario desde la sesión
+// PHP: Get the user ID from the session
 $userId = $_SESSION['user']['id'];
 
-// Consulta para obtener las compras del usuario con detalles del evento
+// PHP: Prepare a query to retrieve the user's completed purchases with event details
 $stmt = $pdo->prepare("
     SELECT 
         o.id AS order_id,
@@ -25,8 +26,12 @@ $stmt = $pdo->prepare("
     WHERE o.user_id = :userId AND o.payment_status = 'completed'
     ORDER BY o.created_at DESC
 ");
+
+// PHP: Bind the user ID parameter and execute the query
 $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
 $stmt->execute();
+
+// PHP: Fetch all matching purchase records
 $purchases = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 

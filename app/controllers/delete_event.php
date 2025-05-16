@@ -1,23 +1,27 @@
 <?php
-// Iniciamos la sesión
+// ======= Start Session =======
 session_start();
+
+// ======= Load Database Connection =======
 require_once '../../config/database.php';
 
-// Verificamos que el método sea POST
+// ======= Verify Request Method and Required Data =======
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['event_id'])) {
+    // ======= Retrieve Event ID from POST Data =======
     $event_id = $_POST['event_id'];
 
-    // Eliminamos el evento de la base de datos
+    // ======= Delete the Event from the Database =======
     $stmt = $pdo->prepare("DELETE FROM events WHERE id = ?");
     $stmt->execute([$event_id]);
 
-    // Mensaje de éxito
+    // ======= Output Success Message (may not be seen due to redirect) =======
     echo "Event deleted successfully.";
 
-    // Redirigimos al listado de eventos
+    // ======= Redirect to the Events List with Success Flag =======
     header("Location: ../../public/events.php?view=list&success=deleted");
     exit();
 } else {
+    // ======= Redirect to the Events List if Request is Invalid =======
     header("Location: ../public/events.php");
     exit();
 }

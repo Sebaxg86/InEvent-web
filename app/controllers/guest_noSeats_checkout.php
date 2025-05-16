@@ -1,15 +1,19 @@
 <?php
+// ======= Load Environment Variables and Database Connection =======
 require_once '../../config/env.php';
 require_once '../../config/database.php';
 
+// ======= Set JSON Response Header =======
 header('Content-Type: application/json');
 
+// ======= Verify that the Request Method is POST =======
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
-    echo json_encode(['message' => 'Método no permitido']);
+    echo json_encode(['message' => 'Method not allowed']);
     exit;
 }
 
+// ======= Retrieve Data Sent from the Client =======
 $data = json_decode(file_get_contents('php://input'), true);
 
 $email = $data['email'] ?? null;
@@ -17,22 +21,25 @@ $ticketQuantity = $data['ticketQuantity'] ?? 0;
 $totalPrice = $data['totalPrice'] ?? 0;
 $eventId = $data['eventId'] ?? null;
 
+// ======= Validate Input Data =======
 if (!$email || $ticketQuantity <= 0 || $totalPrice <= 0 || !$eventId) {
     http_response_code(400);
-    echo json_encode(['message' => 'Datos inválidos']);
+    echo json_encode(['message' => 'Invalid data']);
     exit;
 }
 
 try {
+    // ======= Begin Database Transaction =======
     $pdo->beginTransaction();
 
-    // 1. Registrar o buscar al invitado
+    // ======= 1. Register or Locate the Guest User =======
     $stmt = $pdo->prepare("SELECT id FROM users WHERE email = :email");
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$user) {
+        // ======= Insert Guest User if Not Found =======
         $insertUserStmt = $pdo->prepare("INSERT INTO users (name, email, is_guest) VALUES (:name, :email, 1)");
         $guestName = "Guest";
         $insertUserStmt->bindParam(':name', $guestName, PDO::PARAM_STR);
@@ -43,7 +50,7 @@ try {
         $userId = $user['id'];
     }
 
-    // 2. Crear la orden en la tabla `orders`
+    // ======= 2. Create an Order in the 'orders' Table =======
     $insertOrderStmt = $pdo->prepare("
         INSERT INTO orders (user_id, total, payment_method, payment_status) 
         VALUES (:userId, :totalPrice, 'paypal', 'pending')
@@ -53,12 +60,12 @@ try {
     $insertOrderStmt->execute();
     $orderId = $pdo->lastInsertId();
 
-    // 3. Registrar los boletos en la tabla `order_items`
+    // ======= 3. Insert Tickets into the 'order_items' Table =======
     $insertOrderItemStmt = $pdo->prepare("
         INSERT INTO order_items (order_id, seat_id, event_id, price) 
         VALUES (:orderId, NULL, :eventId, :seatPrice)
     ");
-    $seatPrice = $totalPrice / $ticketQuantity; // Precio por boleto
+    $seatPrice = $totalPrice / $ticketQuantity; // ======= Calculate Price per Ticket =======
     $insertOrderItemStmt->bindParam(':orderId', $orderId, PDO::PARAM_INT);
     $insertOrderItemStmt->bindParam(':eventId',  $eventId,   PDO::PARAM_INT);
     $insertOrderItemStmt->bindParam(':seatPrice', $seatPrice, PDO::PARAM_STR);
@@ -66,7 +73,7 @@ try {
         $insertOrderItemStmt->execute();
     }
 
-    // 4. Actualizar el stock del evento
+    // ======= 4. Update the Event's Available Tickets =======
     $updateEventStmt = $pdo->prepare("
         UPDATE events 
         SET total_seats = total_seats - :ticketQuantity 
@@ -77,10 +84,10 @@ try {
     $updateEventStmt->execute();
 
     if ($updateEventStmt->rowCount() === 0) {
-        throw new Exception('No hay suficientes boletos disponibles.');
+        throw new Exception('Not enough tickets available.');
     }
 
-    // 5. Usar cURL para obtener un token de acceso de PayPal
+    // ======= 5. Obtain PayPal Access Token Using cURL =======
     $clientId     = env('PAYPAL_CLIENT_ID');
     $clientSecret = env('PAYPAL_SECRET_KEY');
     $tokenUrl     = "https://api-m.sandbox.paypal.com/v1/oauth2/token";
@@ -97,17 +104,17 @@ try {
     ]);
     $tokenResponse = curl_exec($ch);
     if (curl_errno($ch)) {
-        throw new Exception("Error cURL (token): " . curl_error($ch));
+        throw new Exception("cURL Error (token): " . curl_error($ch));
     }
     curl_close($ch);
     $tokenData   = json_decode($tokenResponse, true);
     $accessToken = $tokenData['access_token'] ?? null;
     if (!$accessToken) {
-        throw new Exception("No se pudo obtener token de PayPal.");
+        throw new Exception("Unable to obtain PayPal token.");
     }
 
-    // 6. Crear la orden en PayPal
-    $baseUrl = env('APP_URL'); // obtiene la URL base de .env
+    // ======= 6. Create the Order in PayPal =======
+    $baseUrl = env('APP_URL'); // ======= Get Base URL from .env =======
     $orderPayload = json_encode([
         "intent" => "CAPTURE",
         "purchase_units" => [
@@ -116,7 +123,7 @@ try {
                     "currency_code" => "USD",
                     "value"         => $totalPrice,
                 ],
-                "description" => "Compra de $ticketQuantity boletos para el evento $eventId"
+                "description" => "Purchase of $ticketQuantity tickets for event $eventId"
             ]
         ],
         "application_context" => [
@@ -137,7 +144,7 @@ try {
     ]);
     $orderResponse = curl_exec($ch);
     if (curl_errno($ch)) {
-        throw new Exception("Error cURL (order creation): " . curl_error($ch));
+        throw new Exception("cURL Error (order creation): " . curl_error($ch));
     }
     curl_close($ch);
     $orderData = json_decode($orderResponse, true);
@@ -151,12 +158,13 @@ try {
         }
     }
     if (empty($approvalUrl)) {
-        throw new Exception("No se obtuvo URL de aprobación de PayPal.");
+        throw new Exception("Unable to obtain PayPal approval URL.");
     }
 
+    // ======= Commit the Transaction =======
     $pdo->commit();
 
-    // Retornar los datos al front-end: la URL para redirigir a PayPal y el orderId
+    // ======= Return Approval URL and Order ID to the Front-end =======
     echo json_encode([
         'approvalUrl' => $approvalUrl,
         'orderId'     => $orderId

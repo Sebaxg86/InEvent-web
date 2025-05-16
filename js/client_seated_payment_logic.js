@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ====== Retrieve Payment Button and Event ID ======
     const payBtn = document.getElementById('proceed-payment');
     const eventId = new URLSearchParams(window.location.search).get('id'); // Obtener el ID del evento desde la URL
 
-
+    // ====== Function to Display Error Popup ======
     function showError(message) {
         const errorPopup = document.getElementById('error-popup');
         const errorMessage = document.getElementById('error-message');
@@ -14,12 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Cerrar el popup cuando se hace clic en la "X"
+    // ====== Close Error Popup on "X" Click ======
     document.querySelector('.error-popup-close').addEventListener('click', function () {
         document.getElementById('error-popup').style.display = 'none';
     });
-    
-    // Cerrar el popup si se hace clic fuera del contenido
+
+    // ====== Close Error Popup When Clicking Outside the Popup ======
     window.addEventListener('click', function (event) {
         const popup = document.getElementById('error-popup');
         if (event.target === popup) {
@@ -27,31 +28,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-
+    // ====== Handle Payment Process Using Fetch API ======
     async function handlePayment() {
+        // ====== Validate that at Least One Seat is Selected ======
         if (window.selectedSeats.length === 0) {
             showError('Por favor, selecciona al menos un asiento.');
             return;
         }
 
         try {
-            // Enviar los datos al servidor
+            // ====== Send Payment Data to Server ======
             const response = await fetch('../app/controllers/client_seated_checkout.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    selectedSeats: window.selectedSeats, // Usar la variable global para los asientos seleccionados
-                    totalPrice: window.totalPrice, // Usar la variable global para el precio total
+                    selectedSeats: window.selectedSeats,  // Global variable: selected seats
+                    totalPrice: window.totalPrice,          // Global variable: total price
                     eventId,
                 }),
             });
 
+            // ====== Process Server Response ======
             const result = await response.json();
-
             if (response.ok) {
-                // Mostrar la pantalla de espera
+                // ====== Display Waiting Screen and Redirect to PayPal ======
                 document.body.innerHTML = `
                     <div style="text-align: center; margin-top: 20%;">
                         <h2>Redirecting to PayPal</h2>
@@ -64,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     </style>
                 `;
-                // Redirigir a PayPal
                 window.location.href = result.approvalUrl;
             } else {
                 showError(`Error: ${result.message}`);
@@ -75,6 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Asociar el evento de clic al botón de pago
+    // ====== Attach Click Event to Payment Button ======
     payBtn.addEventListener('click', handlePayment);
 });

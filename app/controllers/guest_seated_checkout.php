@@ -1,21 +1,24 @@
 <?php
 require_once '../../config/database.php';
 
+// ======= Set JSON Response Header ============================================
 header('Content-Type: application/json');
 
+// ======= Verify that the Request Method is POST ==============================
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['message' => 'Método no permitido']);
     exit;
 }
 
-$data = json_decode(file_get_contents('php://input'), true);
+// ======= Retrieve Data Sent from the Client ===================================
+$data           = json_decode(file_get_contents('php://input'), true);
+$email          = $data['email'] ?? null;
+$selectedSeats  = $data['selectedSeats'] ?? [];
+$totalPrice     = $data['totalPrice'] ?? 0;
+$eventId        = $data['eventId'] ?? null;
 
-$email = $data['email'] ?? null;
-$selectedSeats = $data['selectedSeats'] ?? [];
-$totalPrice = $data['totalPrice'] ?? 0;
-$eventId = $data['eventId'] ?? null;
-
+// ======= Validate Input Data ================================================
 if (!$email || empty($selectedSeats) || $totalPrice <= 0 || !$eventId) {
     http_response_code(400);
     echo json_encode(['message' => 'Datos inválidos']);
@@ -23,9 +26,10 @@ if (!$email || empty($selectedSeats) || $totalPrice <= 0 || !$eventId) {
 }
 
 try {
+    // ======= Begin Database Transaction ================================
     $pdo->beginTransaction();
 
-    // 1. Registrar al invitado en la tabla `users`
+    // 1. ======= Register Guest User in the `users` Table ================
     $stmt = $pdo->prepare("SELECT id FROM users WHERE email = :email");
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
     $stmt->execute();
@@ -33,39 +37,39 @@ try {
 
     if (!$user) {
         $insertUserStmt = $pdo->prepare("INSERT INTO users (name, email, is_guest) VALUES (:name, :email, 1)");
-        $guestName = "Guest";
-        $insertUserStmt->bindParam(':name', $guestName, PDO::PARAM_STR);
-        $insertUserStmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $guestName      = "Guest";
+        $insertUserStmt->bindParam(':name',  $guestName, PDO::PARAM_STR);
+        $insertUserStmt->bindParam(':email', $email,     PDO::PARAM_STR);
         $insertUserStmt->execute();
         $userId = $pdo->lastInsertId();
     } else {
         $userId = $user['id'];
     }
 
-    // 2. Crear una orden en la tabla `orders`
+    // 2. ======= Create an Order in the `orders` Table ====================
     $insertOrderStmt = $pdo->prepare("
         INSERT INTO orders (user_id, total, payment_method, payment_status) 
         VALUES (:userId, :totalPrice, 'paypal', 'pending')
     ");
-    $insertOrderStmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $insertOrderStmt->bindParam(':userId',     $userId,    PDO::PARAM_INT);
     $insertOrderStmt->bindParam(':totalPrice', $totalPrice, PDO::PARAM_STR);
     $insertOrderStmt->execute();
     $orderId = $pdo->lastInsertId();
 
-    // 3. Registrar los asientos seleccionados en la tabla `order_items`
+    // 3. ======= Register Selected Seats in the `order_items` Table ==========
     $insertOrderItemStmt = $pdo->prepare("
         INSERT INTO order_items (order_id, seat_id, price) 
         VALUES (:orderId, :seatId, :seatPrice)
     ");
-    $seatPrice = $totalPrice / count($selectedSeats); // Precio por asiento
-    $insertOrderItemStmt->bindParam(':orderId', $orderId, PDO::PARAM_INT);
+    $seatPrice = $totalPrice / count($selectedSeats);  // Price per seat
+    $insertOrderItemStmt->bindParam(':orderId',   $orderId,   PDO::PARAM_INT);
     $insertOrderItemStmt->bindParam(':seatPrice', $seatPrice, PDO::PARAM_STR);
 
     foreach ($selectedSeats as $seatLabel) {
-        // Obtener el ID del asiento
+        // ----- Retrieve Seat ID for the given label ----------------------
         $seatIdStmt = $pdo->prepare("SELECT id FROM seats WHERE seat_label = :seatLabel AND event_id = :eventId AND is_sold = 0");
         $seatIdStmt->bindParam(':seatLabel', $seatLabel, PDO::PARAM_STR);
-        $seatIdStmt->bindParam(':eventId', $eventId, PDO::PARAM_INT);
+        $seatIdStmt->bindParam(':eventId',   $eventId,   PDO::PARAM_INT);
         $seatIdStmt->execute();
         $seatId = $seatIdStmt->fetchColumn();
 
@@ -73,19 +77,20 @@ try {
             throw new Exception("El asiento {$seatLabel} no está disponible.");
         }
 
-        // Insertar el asiento en `order_items`
+        // ----- Insert the Seat into `order_items` ------------------------
         $insertOrderItemStmt->bindParam(':seatId', $seatId, PDO::PARAM_INT);
         $insertOrderItemStmt->execute();
 
-        // Marcar el asiento como vendido en la tabla `seats`
+        // ----- Mark the Seat as Sold in the `seats` Table ------------------
         $updateSeatStmt = $pdo->prepare("UPDATE seats SET is_sold = 1 WHERE id = :seatId");
         $updateSeatStmt->bindParam(':seatId', $seatId, PDO::PARAM_INT);
         $updateSeatStmt->execute();
     }
 
+    // ======= Commit the Transaction =========================================
     $pdo->commit();
 
-    // 4. Obtener token de acceso de PayPal usando cURL
+    // 4. ======= Obtain PayPal Access Token Using cURL =======================
     $clientId     = env('PAYPAL_CLIENT_ID');
     $clientSecret = env('PAYPAL_SECRET_KEY');
     $tokenUrl     = "https://api-m.sandbox.paypal.com/v1/oauth2/token";
@@ -111,14 +116,13 @@ try {
         throw new Exception("No se pudo obtener token de PayPal.");
     }
 
-    // 5. Crear la orden en PayPal
-    // Construir URLs absolutas usando APP_URL definido en .env
-    $baseUrl = env('APP_URL', 'http://localhost/InEvent-web');
+    // 5. ======= Create the Order in PayPal ================================
+    $baseUrl      = env('APP_URL', 'http://localhost/InEvent-web');
     $orderPayload = json_encode([
-        "intent" => "CAPTURE",
-        "purchase_units" => [
+        "intent"            => "CAPTURE",
+        "purchase_units"    => [
             [
-                "amount" => [
+                "amount"      => [
                     "currency_code" => "USD",
                     "value"         => $totalPrice,
                 ],
@@ -161,7 +165,7 @@ try {
         throw new Exception("No se obtuvo URL de aprobación de PayPal.");
     }
 
-    // Retornar la URL de aprobación y el orderId al front-end
+    // ======= Return the Approval URL and Order ID to the Front-end ============
     echo json_encode([
         'approvalUrl' => $approvalUrl,
         'orderId'     => $orderId
@@ -171,3 +175,4 @@ try {
     http_response_code(500);
     echo json_encode(['message' => $e->getMessage()]);
 }
+?>
