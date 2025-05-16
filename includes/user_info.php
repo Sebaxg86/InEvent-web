@@ -22,7 +22,7 @@ $stmt = $pdo->prepare("
     LEFT JOIN order_items oi ON o.id = oi.order_id
     LEFT JOIN seats s ON oi.seat_id = s.id
     LEFT JOIN events e ON e.id = COALESCE(s.event_id, oi.event_id)
-    WHERE o.user_id = :userId
+    WHERE o.user_id = :userId AND o.payment_status = 'completed'
     ORDER BY o.created_at DESC
 ");
 $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
