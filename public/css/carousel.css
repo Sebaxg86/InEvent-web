@@ -1,62 +1,28 @@
-/* === CAROUSEL CSS === */
-.hero-carousel{
-  --w: 100%;          /* anchura contenedor */
-  --h: 420px;         /* altura fija - cambia a tu gusto */
-  --duration: 5s;     /* tiempo entre slides */
-  position: relative;
-  width: var(--w);
-  height: var(--h);
-  overflow: hidden;
-  margin-inline:auto;
-  border-radius: 14px;
-  box-shadow: 0 8px 24px rgb(0 0 0 / .18);
+/* Contenedor principal del carrusel */
+.carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Limita el ancho máximo del carrusel */
+    margin: 0 auto; /* Centra el carrusel horizontalmente */
+    padding: 20px 0; /* Espaciado superior e inferior */
+    position: relative; /* Necesario para posicionar los puntitos */
+    margin-bottom: 3rem;
 }
 
-/* track con todas las slides */
-.carousel-track{
-  display: flex;
-  width: 100%;
-  height: 100%;
-  transition: transform .8s cubic-bezier(.4,.1,.2,1);
+/* Cada slide */
+.slider > div {
+    width: 100%;
+    height: 400px; /* Ajusta la altura del carrusel */
+    position: relative;
+    overflow: hidden;
 }
 
-/* slide individual */
-.slide{
-  flex: 0 0 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  filter: brightness(.95) saturate(1.05);
-  transition: filter .35s;
-}
-.slide:hover{ filter: brightness(1) saturate(1.15); }
-
-/* PUNTITOS */
-.carousel-nav{
-  position:absolute;
-  bottom: 14px;
-  left: 50%;
-  translate: -50% 0;
-  display: flex;
-  gap: .65rem;
-}
-.nav-dot{
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  background: transparent;
-  cursor: pointer;
-  opacity:.7;
-  transition: background .3s, transform .3s;
-}
-.nav-dot[aria-selected="true"]{
-  background:#fff;
-  transform:scale(1.2);
-  opacity:1;
-}
-
-/* RESPONSIVE */
-@media(max-width: 600px){
-  .hero-carousel{ --h: 260px; }
+/* Imágenes dentro de cada slide */
+.slider > div img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen al contenedor sin distorsionarla */
+    display: block;
 }

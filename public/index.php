@@ -10,6 +10,16 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js"></script>
+
+    <script>
+      $(document).ready(function(){
+        $(".slider").bxSlider();
+      });
+    </script>
+
     <!--Styles-->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/carousel.css">
@@ -35,28 +45,29 @@ if (session_status() === PHP_SESSION_NONE) {
             <p>Discover unforgettable moments. Book your tickets now, wherever you are.</p>
         </section>
     
-<!---- CAROUSEL – PEGAR DENTRO DEL <body> --->
-<section class="hero-carousel" aria-label="Galería promocional">
-  <div class="carousel-track">
-    <!-- 6 imág.  (reemplaza data-src por tu URL) -->
-    <figure class="slide" data-src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/10/7f/97/24.jpg"  aria-label="Imagen 1"></figure>
-    <figure class="slide" data-src="https://cultivarte.mx/wp-content/uploads/2023/10/i-virtuosi-dell-opera.jpg"  aria-label="Imagen 2"></figure>
-    <figure class="slide" data-src="https://s.abcnews.com/images/GMA/rufus-du-soul-01-ht-llr-221011_1665534667674_hpMain.jpg"  aria-label="Imagen 3"></figure>
-    <figure class="slide" data-src="https://world-masters-athletics.org/wp-content/uploads/2023/08/Bucharest_Marathon-scaled.jpg"  aria-label="Imagen 4"></figure>
-    <figure class="slide" data-src="https://i.ytimg.com/vi/hY23w-rbarI/maxresdefault.jpg"  aria-label="Imagen 5"></figure>
-    <figure class="slide" data-src="https://images.adsttc.com/media/images/58d5/3a58/e58e/ce48/a700/003f/large_jpg/002.jpg?1490369108"  aria-label="Imagen 6"></figure>
-  </div>
-
-  <!-- Puntitos de progreso -->
-  <div class="carousel-nav" role="tablist" aria-label="Paginación">
-    <button class="nav-dot" aria-label="Ir a la 1" role="tab"></button>
-    <button class="nav-dot" aria-label="Ir a la 2" role="tab"></button>
-    <button class="nav-dot" aria-label="Ir a la 3" role="tab"></button>
-    <button class="nav-dot" aria-label="Ir a la 4" role="tab"></button>
-    <button class="nav-dot" aria-label="Ir a la 5" role="tab"></button>
-    <button class="nav-dot" aria-label="Ir a la 6" role="tab"></button>
-  </div>
-</section>
+        <!-- ===================== HERO / CAROUSEL ===================== -->
+        <div class="carousel">
+            <div class="slider">
+                <div>
+                    <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/10/7f/97/24.jpg" alt="Image 1">
+                </div>
+                <div>
+                    <img src="https://cultivarte.mx/wp-content/uploads/2023/10/i-virtuosi-dell-opera.jpg" alt="Image 2">
+                </div>
+                <div>
+                    <img src="https://s.abcnews.com/images/GMA/rufus-du-soul-01-ht-llr-221011_1665534667674_hpMain.jpg" alt="Image 3">
+                </div>
+                <div>
+                    <img src="https://www.tadaima.com.mx/wp-content/uploads/2023/09/sns_1920_1080-1-1024x576.jpg" alt="Image 4">
+                </div>  
+                <div>
+                    <img src="https://www.cameronhouse.co.uk/content/uploads/2024/03/camern-house-cinema.jpg" alt="Image 5">
+                </div>
+                <div>
+                    <img src="https://static01.nyt.com/images/2017/10/17/science/11physed-marathon-photo/11physed-marathon-photo-superJumbo.jpg" alt="Image 6">
+                </div>
+            </div>
+        </div>
 
         <!--View Catalog Button-->
         <div class="btn-div">
@@ -120,6 +131,5 @@ if (session_status() === PHP_SESSION_NONE) {
         window.location.href = 'events.php'; // Redirige a events.php
     });
     </script>
-    <script src="../js/carrousel.js"></script>
 </body>
 </html>
