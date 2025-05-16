@@ -14,6 +14,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
+    // Validar el formato del correo electrónico
+    if (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email)) {
+        $_SESSION['error'] = "Invalid email format.";
+        header("Location: ../../public/register.php?form=register");
+        exit;
+    }
+
     if ($password !== $confirm_password) {
         $_SESSION['error'] = "Passwords do not match.";
         header("Location: ../../public/register.php?form=register");

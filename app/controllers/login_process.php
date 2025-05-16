@@ -12,6 +12,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
+    // Validar el formato del correo electrónico
+    if (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email)) {
+        $_SESSION['error'] = "Invalid email format.";
+        header("Location: ../../public/register.php?form=login");
+        exit;
+    }
+
     try {
         $stmt = $pdo->prepare("SELECT id, name, email, pass_hash, is_admin, is_guest FROM users WHERE email = :email LIMIT 1");
         $stmt->execute(['email' => $email]);
