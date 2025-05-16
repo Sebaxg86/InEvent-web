@@ -1,19 +1,102 @@
 .contact-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 40px;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
+    margin-top: 3rem;
+}
+
+.contact-container p {
+    font-size: 1rem;
+    margin-top: 2rem;
 }
 
 .contact-form {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    background-color: #ffffff;
-    padding: 40px 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
+    align-items: center;
+    background-color: #fff; /* Fondo blanco */
+    padding: 2rem; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra inicial */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+}
+
+.contact-form:hover {
+    transform: translateY(-5px); /* Efecto de elevación */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Sombra más intensa */
+}
+
+/* Campos del formulario */
+.contact-form input[type="email"],
+.contact-form input[type="text"],
+.contact-form textarea {
     width: 100%;
-    text-align: center;
+    max-width: 400px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form input[type="email"]:focus,
+.contact-form input[type="text"]:focus,
+.contact-form textarea:focus {
+    border-color: #007bff; /* Color azul al enfocar */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Sombra azul */
+    outline: none;
+}
+
+.contact-form textarea {
+    resize: none; /* Deshabilita el redimensionamiento */
+}
+
+/* Botón de enviar */
+.contact-form .btn {
+    background-color: #007bff; /* Azul brillante */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.contact-form button.btn {
+    display: block;
+    margin: 20px auto 0; /* Centra horizontalmente con auto */
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.contact-form button.btn:hover {
+    background-color: #0056b3;
+}
+
+.contact-form button.btn:active {
+    transform: scale(0.95);
+}
+
+/* Enlace adicional (si aplica) */
+.contact-form p a {
+    color: #6c63ff; /* Morado brillante */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.contact-form p a:hover {
+    color: #4b47c8; /* Morado más oscuro */
 }
