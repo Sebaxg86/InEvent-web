@@ -89,6 +89,56 @@ header {
     padding: 0;
 }
 
+/* Ocultar el botón de hamburguesa en pantallas grandes */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+/* Define el estilo de las barras */
+.hamburger span {
+    display: block;
+    height: 3px;
+    width: 25px;
+    background: var(--text-color);
+    border-radius: 2px;
+}
+
+/* Media Query para dispositivos móviles */
+@media (max-width: 768px) {
+    /* Oculta el menú de lista por defecto */
+    .nav-bar ul {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        background-color: var(--navbar-bg);
+        position: absolute;
+        top: 60px; /* Ajusta según el alto de la navbar */
+        left: 0;
+        padding: 1rem 0;
+    }
+    
+    /* Muestra el botón de hamburguesa */
+    .hamburger {
+        display: flex;
+    }
+    
+    /* Muestra el menú cuando tenga la clase "active" */
+    .nav-bar ul.active {
+        display: flex;
+    }
+    
+    /* Opcional: centrar links en el menú móvil */
+    .nav-bar ul li {
+        width: 100%;
+        text-align: center;
+        padding: 0.5em 0;
+    }
+}
+
 /* ========== WELCOME MESSAGE ========== */
 .welcome-message h2 {
     text-align: center;

@@ -1,4 +1,11 @@
 <nav class="nav-bar">
+    
+    <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
     <ul>
         <li><a href="index.php">Home <ion-icon name="home-outline"></ion-icon></a></li>
 

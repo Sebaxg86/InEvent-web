@@ -130,5 +130,16 @@ if (session_status() === PHP_SESSION_NONE) {
         window.location.href = 'events.php'; // Redirige a events.php
     });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-bar ul');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        });
+    </script>
 </body>
 </html>
