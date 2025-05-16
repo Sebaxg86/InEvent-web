@@ -56,9 +56,9 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!--Styles-->
+    <link rel="stylesheet" href="css/events_seats.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/events.css">
-    <link rel="stylesheet" href="css/events_seats.css">
     <link rel="stylesheet" href="css/guest.css">
 
     <!--Fonts-->
