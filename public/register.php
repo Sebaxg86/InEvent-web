@@ -16,6 +16,7 @@ $form_type = $_GET['form'] ?? 'login'; // default = login
     <!--Styles-->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/register_account.css">
     <link rel="stylesheet" href="css/user_info.css">
     <link rel="stylesheet" href="css/contact.css">
@@ -47,6 +48,28 @@ $form_type = $_GET['form'] ?? 'login'; // default = login
 
     <!--Footer-->
     <?php include_once "../includes/footer.php"; ?>
+
+    <?php
+if (isset($_SESSION['error'])) {
+    $error = $_SESSION['error'];
+    unset($_SESSION['error']);
+    echo "<script>
+            window.addEventListener('DOMContentLoaded', function() {
+                showError('".htmlspecialchars($error, ENT_QUOTES)."');
+            });
+          </script>";
+}
+?>
+
+    <!-- Popup de error -->
+    <div id="error-popup" class="error-popup">
+        <div class="error-popup-content">
+            <span class="error-popup-close">&times;</span>
+            <p id="error-message"></p>
+        </div>
+    </div>
+
+    <script src="../js/modal.js"></script>
 
     <!--Ionic Icons Installation-->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
