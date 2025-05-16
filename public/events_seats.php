@@ -60,6 +60,7 @@ try {
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/events.css">
     <link rel="stylesheet" href="css/guest.css">
+    <link rel="stylesheet" href="css/modal.css">
 
     <!--Fonts-->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -173,6 +174,10 @@ try {
 
     <!--Footer-->
     <?php include_once "../includes/footer.php"; ?>
+
+    <?php include_once "../includes/modal.php"; ?>
+    
+    <script src="../js/modal.js"></script>
 
     <!--Ionic Icons Installation-->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
