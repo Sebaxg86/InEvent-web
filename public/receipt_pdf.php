@@ -69,48 +69,23 @@ $tickets = $stmt2->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <div class="btn-container">
-        <button href="index.php" class="btn-download"><ion-icon name="arrow-undo-outline" class="home"></ion-icon>Home</button>
-        <button id="save-pdf" class="btn-download">Save Receipt<ion-icon name="cloud-download-outline" class="save"></ion-icon></button>
+        <button class="btn-download" onclick="window.location.href='index.php'"><ion-icon name="arrow-undo-outline" class="home"></ion-icon>Home</button>
+        <button id="save-pdf" class="btn-download" onclick="downloadPDF()">Save Receipt<ion-icon name="cloud-download-outline" class="save"></ion-icon></button>
     </div>
 
-    <div class="container">
-        <div class="order-details">
-            <h2>Order Details</h2>
-            <div class="details-details">
-                <p><strong>Order ID:</strong> <?= $orderDetails['order_id'] ?></p>
-                <p><strong>Customer Name:</strong> <?= $orderDetails['customer_name'] ?></p>
-                <p><strong>Email:</strong> <?= $orderDetails['email'] ?></p>
-                <p><strong>Date:</strong> <?= $orderDetails['created_at'] ?></p>
-                <p><strong>Ticket Amount:</strong> <?= count($tickets) ?></p>
-                <p><strong>Payment Method:</strong> <?= ucfirst($orderDetails['payment_method']) ?></p>
-                <p><strong>Total Amount:</strong> $<?= $orderDetails['total'] ?></p>
-            </div>
-        </div>
-        <hr>
-        <div class="tickets-container">
-            <?php foreach($tickets as $ticket): ?>
-<div class="ticket" data-event="<?= strtoupper(substr($ticket['event_name'],0,12));?>">
-    <div class="ticket-content">
-        <h3><?= $ticket['event_name']; ?></h3>
-        <p class="small"><strong>Date:</strong> <?= date("M d, Y • H:i",strtotime($ticket['event_date']));?></p>
-        <p class="small"><strong>Seat:</strong> <?= $ticket['seat_label']!='-'?$ticket['seat_label']:'—';?>  |
-           <strong>ID:</strong> <?= $ticket['ticket_id'];?></p>
-        <p class="small"><strong>Price:</strong> $<?= $ticket['price'];?></p>
-    </div>
-</div>
-            <?php endforeach; ?>
-        </div>
-
-        <p><a href="events.php">Volver a inicio</a></p>
-    </div>
-
-    <!-- Incluir la librería html2pdf.js vía CDN -->
-            <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>-->
-    <!-- Incluir el archivo de lógica para generar PDF -->
-            <!--<script src="receipt_pdf_logic.js"></script>-->
+    <?php include_once "../includes/receipt_pdf_content.php"; ?>
     
     <!--Ionic Icons Installation-->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script>
+    function downloadPDF() {
+        const orderId = <?= json_encode($orderId) ?>;
+        const eventId = <?= json_encode($eventIdForJoin) ?>;
+        const url = `../app/controllers/generate_pdf.php?order_id=${orderId}&event_id=${eventId}`;
+        window.location.href = url; // Redirige al archivo generate_pdf.php
+    }
+</script>
 </body>
 </html>
