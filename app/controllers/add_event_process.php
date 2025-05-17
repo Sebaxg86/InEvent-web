@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // ======= Redirect to the Events List with Success Status =======
-        header("Location: ../../public/events.php?view=list&success=added");
+        header("Location: ../../events.php?view=list&success=added");
         exit();
     } catch (PDOException $e) {
         // ======= Display the PDO Error =======
@@ -64,6 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 } else {
     // ======= Redirect to Events List if Request Method is Not POST =======
-    header("Location: ../public/events.php");
+    header("Location: ../events.php");
     exit();
 }

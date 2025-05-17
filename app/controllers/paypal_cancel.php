@@ -21,7 +21,7 @@ try {
 
     // ======= Redirect to the Cancellation Notification Page =======
     $baseUrl = env('APP_URL');
-    header("Location: $baseUrl/public/paypal_cancelled.php?order_id=$orderId&event_id=$eventId");
+    header("Location: $baseUrl/paypal_cancelled.php?order_id=$orderId&event_id=$eventId");
     exit;
 } catch (Exception $e) {
     // ======= Handle Errors =======

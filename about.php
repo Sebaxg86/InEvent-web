@@ -21,10 +21,10 @@ if (session_status() === PHP_SESSION_NONE) {
 </head>
 <body>
     <!--Header-->
-    <?php include_once '../includes/header.php'; ?>
+    <?php include_once 'includes/header.php'; ?>
 
     <!--Navbar-->
-    <?php include_once '../includes/navbar.php'; ?>
+    <?php include_once 'includes/navbar.php'; ?>
 
     <!-- About Us -->
     <section class="welcome-message">
@@ -77,7 +77,7 @@ if (session_status() === PHP_SESSION_NONE) {
     </main>
 
     <!--Footer-->
-    <?php include_once "../includes/footer.php"; ?>
+    <?php include_once "includes/footer.php"; ?>
 
     <!--Ionic Icons Installation-->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

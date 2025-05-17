@@ -3,7 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once '../config/database.php'; // Incluye la conexión a la base de datos
+require_once 'config/database.php'; // Incluye la conexión a la base de datos
 
 //Determinar si el usuario está registrado
 $isGuest = !isset($_SESSION['user']);
@@ -69,10 +69,10 @@ try {
 </head>
 <body class="<?php echo $isGuest ? 'guest' : 'logged-in'; ?>">
     <!--Header-->
-    <?php include_once '../includes/header.php'; ?>
+    <?php include_once 'includes/header.php'; ?>
 
     <!--Navbar-->
-    <?php include_once '../includes/navbar.php'; ?>
+    <?php include_once 'includes/navbar.php'; ?>
 
     <!--Seats selection-->
     <?php if ($usesSeats): ?>
@@ -171,29 +171,29 @@ try {
     <?php endif; ?>
 
     <!--Footer-->
-    <?php include_once "../includes/footer.php"; ?>
+    <?php include_once "includes/footer.php"; ?>
 
-    <?php include_once "../includes/modal.php"; ?>
+    <?php include_once "includes/modal.php"; ?>
     
-    <script src="../js/modal.js"></script>
+    <script src="js/modal.js"></script>
 
     <!--Ionic Icons Installation-->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <!--Scripts-->
-    <script src="../js/events_seats.js"></script>
+    <script src="js/events_seats.js"></script>
     <?php if ($isGuest): ?>
         <?php if ($usesSeats): ?>
-            <script src="../js/guest_seated_payment_logic.js"></script>
+            <script src="js/guest_seated_payment_logic.js"></script>
         <?php else: ?>
-            <script src="../js/guest_noSeats_payment_logic.js"></script>
+            <script src="js/guest_noSeats_payment_logic.js"></script>
         <?php endif; ?>
     <?php else: ?>
         <?php if ($usesSeats): ?>
-            <script src="../js/client_seated_payment_logic.js"></script>
+            <script src="js/client_seated_payment_logic.js"></script>
         <?php else: ?>
-            <script src="../js/client_noSeats_payment_logic.js"></script>
+            <script src="js/client_noSeats_payment_logic.js"></script>
         <?php endif; ?>
     <?php endif; ?>
 </body>

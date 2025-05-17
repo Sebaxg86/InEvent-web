@@ -28,31 +28,31 @@ $form_type = $_GET['form'] ?? 'login'; // default = login
 <body>
 
     <!--Header-->
-    <?php include_once '../includes/header.php'; ?>
+    <?php include_once 'includes/header.php'; ?>
 
     <!--Navbar-->
-    <?php include_once '../includes/navbar.php'; ?>
+    <?php include_once 'includes/navbar.php'; ?>
 
     <!--Main-->
     <?php
         if (isset($_SESSION['user'])) {
-            include_once '../includes/user_info.php';
+            include_once 'includes/user_info.php';
         } else {
             if ($form_type === 'register') {
-                include_once '../includes/register_account.php';
+                include_once 'includes/register_account.php';
             } else {
-                include_once '../includes/login.php';
+                include_once 'includes/login.php';
             }
         }
     ?>
 
     <!--Footer-->
-    <?php include_once "../includes/footer.php"; ?>
+    <?php include_once "includes/footer.php"; ?>
     
     
-    <?php include_once "../includes/modal.php"; ?>
+    <?php include_once "includes/modal.php"; ?>
 
-    <script src="../js/modal.js"></script>
+    <script src="js/modal.js"></script>
 
     <!--Ionic Icons Installation-->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

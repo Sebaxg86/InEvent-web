@@ -5,7 +5,7 @@ if (!isset($_GET['order_id']) || !isset($_GET['event_id'])) {
 $orderId = htmlspecialchars($_GET['order_id']);
 $eventIdForJoin = htmlspecialchars($_GET['event_id']);
 
-require_once '../config/database.php';
+require_once 'config/database.php';
 
 // Consulta para obtener los detalles de la orden y el usuario
 $stmt = $pdo->prepare("
@@ -73,7 +73,7 @@ $tickets = $stmt2->fetchAll(PDO::FETCH_ASSOC);
         <button id="save-pdf" class="btn-download" onclick="downloadPDF()">Save Receipt<ion-icon name="cloud-download-outline" class="save"></ion-icon></button>
     </div>
 
-    <?php include_once "../includes/receipt_pdf_content.php"; ?>
+    <?php include_once "includes/receipt_pdf_content.php"; ?>
     
     <!--Ionic Icons Installation-->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -83,7 +83,7 @@ $tickets = $stmt2->fetchAll(PDO::FETCH_ASSOC);
     function downloadPDF() {
         const orderId = <?= json_encode($orderId) ?>;
         const eventId = <?= json_encode($eventIdForJoin) ?>;
-        const url = `../app/controllers/generate_pdf.php?order_id=${orderId}&event_id=${eventId}`;
+        const url = `app/controllers/generate_pdf.php?order_id=${orderId}&event_id=${eventId}`;
         window.location.href = url; // Redirige al archivo generate_pdf.php
     }
 </script>

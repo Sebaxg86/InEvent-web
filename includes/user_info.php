@@ -46,7 +46,7 @@ $purchases = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <p><strong>Email:</strong> <?= htmlspecialchars($_SESSION['user']['email']) ?></p>
     
         <!-- Logout button -->
-        <form action="../public/logout.php">
+        <form action="../logout.php">
             <div class="btn-div">
                 <button class="btn-danger">Logout</button>
             </div>

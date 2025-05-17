@@ -14,21 +14,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // ======= Check for Missing Fields =======
     if (!$fullname || !$email || !$password || !$confirm_password) {
         $_SESSION['error'] = "Please fill in all fields.";
-        header("Location: ../../public/register.php?form=register");
+        header("Location: ../../register.php?form=register");
         exit;
     }
 
     // ======= Validate Email Format =======
     if (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email)) {
         $_SESSION['error'] = "Invalid email format.";
-        header("Location: ../../public/register.php?form=register");
+        header("Location: ../../register.php?form=register");
         exit;
     }
 
     // ======= Verify Matching Passwords =======
     if ($password !== $confirm_password) {
         $_SESSION['error'] = "Passwords do not match.";
-        header("Location: ../../public/register.php?form=register");
+        header("Location: ../../register.php?form=register");
         exit;
     }
 
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if ($stmt->rowCount() > 0) {
             $_SESSION['error'] = "This email is already registered.";
-            header("Location: ../../public/register.php?form=register");
+            header("Location: ../../register.php?form=register");
             exit;
         }
 
@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         ];
 
         // ======= Redirect to the Registration Page or Dashboard =======
-        header("Location: ../../public/register.php");
+        header("Location: ../../register.php");
         exit;
     } catch (PDOException $e) {
         // ======= Handle Database Errors =======
@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 } else {
     // ======= Redirect if the Request Method is Not POST =======
-    header("Location: ../../public/register.php");
+    header("Location: ../../register.php");
     exit;
 }
 ?>

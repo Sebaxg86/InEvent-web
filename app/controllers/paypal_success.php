@@ -64,7 +64,7 @@ try {
 
         // ======= Build Redirection URL to Receipt Page Using APP_URL =======
         $baseUrl = env('APP_URL');
-        header("Location: $baseUrl/public/receipt_pdf.php?order_id=$orderId&event_id=$eventId");
+        header("Location: $baseUrl/receipt_pdf.php?order_id=$orderId&event_id=$eventId");
         exit;
     } else {
         throw new Exception("Payment capture failed.");
