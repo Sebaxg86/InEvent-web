@@ -196,5 +196,16 @@ try {
             <script src="js/client_noSeats_payment_logic.js"></script>
         <?php endif; ?>
     <?php endif; ?>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-bar ul');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        });
+    </script>
 </body>
 </html>
