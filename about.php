@@ -40,7 +40,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <!-- Our Mission -->
         <section>
             <div>
-                <img src="assets/img/mission.png" alt="Our Mission" width="300">
+                <img src="img/mission.png" alt="Our Mission" width="300">
             </div>
             <div>
                 <h3>Our Mission</h3>
@@ -55,14 +55,14 @@ if (session_status() === PHP_SESSION_NONE) {
                 <p>To become the leading digital event gateway in Latin America, redefining how people discover and access live experiences.</p>
             </div>
             <div>
-                <img src="assets/img/vision.png" alt="Our Vision" width="300">
+                <img src="img/vision.png" alt="Our Vision" width="300">
             </div>
         </section>
 
         <!-- Our Values -->
         <section>
             <div>
-                <img src="assets/img/values.png" alt="Our Values" width="300">
+                <img src="img/values.png" alt="Our Values" width="300">
             </div>
             <div>
                 <h3>Our Values</h3>
