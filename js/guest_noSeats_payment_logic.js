@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // ====== Send Payment Data to Server Using Fetch API ======
-            const response = await fetch('../app/controllers/guest_noSeats_checkout.php', {
+            const response = await fetch('app/controllers/guest_noSeats_checkout.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

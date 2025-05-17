@@ -18,10 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['event_id'])) {
     echo "Event deleted successfully.";
 
     // ======= Redirect to the Events List with Success Flag =======
-    header("Location: ../../public/events.php?view=list&success=deleted");
+    header("Location: ../../events.php?view=list&success=deleted");
     exit();
 } else {
     // ======= Redirect to the Events List if Request is Invalid =======
-    header("Location: ../public/events.php");
+    header("Location: ../events.php");
     exit();
 }

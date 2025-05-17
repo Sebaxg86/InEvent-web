@@ -13,14 +13,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // ======= Validate Required Fields =======
     if (!$email || !$password) {
         $_SESSION['error'] = "Please fill in all fields.";
-        header("Location: ../../public/register.php?form=login");
+        header("Location: ../../register.php?form=login");
         exit;
     }
 
     // ======= Validate Email Format =======
     if (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email)) {
         $_SESSION['error'] = "Invalid email format.";
-        header("Location: ../../public/register.php?form=login");
+        header("Location: ../../register.php?form=login");
         exit;
     }
 
@@ -39,12 +39,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 'is_admin' => $user['is_admin'],
                 'is_guest' => $user['is_guest']
             ];
-            header("Location: ../../public/index.php");
+            header("Location: ../../index.php");
             exit;
         } else {
             // ======= Handle Invalid Credentials =======
             $_SESSION['error'] = "Invalid email or password.";
-            header("Location: ../../public/register.php?form=login");
+            header("Location: ../../register.php?form=login");
             exit;
         }
     } catch (PDOException $e) {
@@ -54,6 +54,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 } else {
     // ======= Redirect to Login Form if Request is Not POST =======
-    header("Location: ../../public/register.php");
+    header("Location: ../../register.php");
     exit;
 }

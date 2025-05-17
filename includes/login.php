@@ -4,7 +4,7 @@
 
 <div class="login-container">
     <div class="login-form">
-        <form action="../app/controllers/login_process.php" method="post">
+        <form action="app/controllers/login_process.php" method="post">
             <label for="email">Email Address:</label><br>
             <input type="email" id="email" name="email" required><br><br>
     

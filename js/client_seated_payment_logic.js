@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // ====== Send Payment Data to Server ======
-            const response = await fetch('../app/controllers/client_seated_checkout.php', {
+            const response = await fetch('app/controllers/client_seated_checkout.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

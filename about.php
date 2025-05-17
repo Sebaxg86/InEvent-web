@@ -21,10 +21,10 @@ if (session_status() === PHP_SESSION_NONE) {
 </head>
 <body>
     <!--Header-->
-    <?php include_once '../includes/header.php'; ?>
+    <?php include_once 'includes/header.php'; ?>
 
     <!--Navbar-->
-    <?php include_once '../includes/navbar.php'; ?>
+    <?php include_once 'includes/navbar.php'; ?>
 
     <!-- About Us -->
     <section class="welcome-message">
@@ -40,7 +40,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <!-- Our Mission -->
         <section>
             <div>
-                <img src="assets/img/mission.png" alt="Our Mission" width="300">
+                <img src="img/mission.png" alt="Our Mission" width="300">
             </div>
             <div>
                 <h3>Our Mission</h3>
@@ -55,14 +55,14 @@ if (session_status() === PHP_SESSION_NONE) {
                 <p>To become the leading digital event gateway in Latin America, redefining how people discover and access live experiences.</p>
             </div>
             <div>
-                <img src="assets/img/vision.png" alt="Our Vision" width="300">
+                <img src="img/vision.png" alt="Our Vision" width="300">
             </div>
         </section>
 
         <!-- Our Values -->
         <section>
             <div>
-                <img src="assets/img/values.png" alt="Our Values" width="300">
+                <img src="img/values.png" alt="Our Values" width="300">
             </div>
             <div>
                 <h3>Our Values</h3>
@@ -77,10 +77,21 @@ if (session_status() === PHP_SESSION_NONE) {
     </main>
 
     <!--Footer-->
-    <?php include_once "../includes/footer.php"; ?>
+    <?php include_once "includes/footer.php"; ?>
 
     <!--Ionic Icons Installation-->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-bar ul');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        });
+    </script>
 </body>
 </html>

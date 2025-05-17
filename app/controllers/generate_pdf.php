@@ -67,7 +67,7 @@ include '../../includes/receipt_pdf_content.php'; // Include receipt content
 $html = ob_get_clean();
 
 // ======= Load CSS Styles for the PDF =======
-$css = file_get_contents('../../public/css/receipt_pdf.css'); // Path to CSS file
+$css = file_get_contents('../../css/receipt_pdf.css'); // Path to CSS file
 $dompdf->loadHtml('<style>' . $css . '</style>' . $html);
 
 // ======= Set Paper Size and Orientation =======

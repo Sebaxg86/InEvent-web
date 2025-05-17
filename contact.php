@@ -21,10 +21,10 @@ if (session_status() === PHP_SESSION_NONE) {
 </head>
 <body>
     <!--Header-->
-    <?php include_once '../includes/header.php'; ?>
+    <?php include_once 'includes/header.php'; ?>
 
     <!--Navbar-->
-    <?php include_once '../includes/navbar.php'; ?>
+    <?php include_once 'includes/navbar.php'; ?>
 
     <!--Main-->
     <section class="welcome-message">
@@ -51,10 +51,21 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 
     <!--Footer-->
-    <?php include_once "../includes/footer.php"; ?>
+    <?php include_once "includes/footer.php"; ?>
 
     <!--Ionic Icons Installation-->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-bar ul');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        });
+    </script>
 </body>
 </html>
