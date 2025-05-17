@@ -4,7 +4,7 @@
 
 <section class="add-container">
     <div class="add-form">
-        <form action="../app/controllers/add_event_process.php" method="POST">
+        <form action="app/controllers/add_event_process.php" method="POST">
             <label>Title:</label>
             <input type="text" name="title" required><br>
     

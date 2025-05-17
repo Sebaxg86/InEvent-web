@@ -1,6 +1,6 @@
 <?php
 // PHP: Include the database connection
-require_once '../config/database.php';
+require_once 'config/database.php';
 
 // PHP: Get the user ID from the session
 $userId = $_SESSION['user']['id'];
@@ -46,7 +46,7 @@ $purchases = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <p><strong>Email:</strong> <?= htmlspecialchars($_SESSION['user']['email']) ?></p>
     
         <!-- Logout button -->
-        <form action="../logout.php">
+        <form action="logout.php">
             <div class="btn-div">
                 <button class="btn-danger">Logout</button>
             </div>

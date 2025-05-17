@@ -6,7 +6,7 @@
 
     <div class="events-grid">
         <?php
-        require_once '../config/database.php';
+        require_once 'config/database.php';
         $stmt = $pdo->query("SELECT * FROM events ORDER BY event_date ASC");
         while ($event = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
             <?php

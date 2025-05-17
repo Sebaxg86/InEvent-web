@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // Enviar los datos al servidor
-            const response = await fetch('../app/controllers/guest_seated_checkout.php', {
+            const response = await fetch('app/controllers/guest_seated_checkout.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
