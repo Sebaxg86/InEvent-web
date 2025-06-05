@@ -1,5 +1,5 @@
 <section class="welcome-message">
-    <h2>Access your account</h2>
+    <h2>Login into your account</h2>
 </section>
 
 <div class="login-container">
