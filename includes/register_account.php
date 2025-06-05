@@ -4,7 +4,7 @@
 
 <div class="register-container">
     <div class="register-form">
-        <form action="app/controllers/register_process.php" method="post">
+        <form id="register-form" action="app/controllers/register_process.php" method="post">
             <label for="fullname">Full Name:</label><br>
             <input type="text" id="fullname" name="fullname" required><br><br>
     
